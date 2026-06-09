@@ -1,0 +1,29 @@
+{
+  "company": "台積電 TSMC",
+  "as_of": "2026-06（示範）",
+  "use_cases": [
+    {"name": "AI 缺陷偵測／良率預測", "capability": "良率管理", "value": 5, "feasibility": 4, "type": "extend"},
+    {"name": "預測性設備維護", "capability": "廠務與設備工程", "value": 4, "feasibility": 4, "type": "defend"},
+    {"name": "AI 產能與排程優化", "capability": "產能規劃與配置", "value": 4, "feasibility": 4, "type": "extend"},
+    {"name": "AI 供應鏈需求預測", "capability": "供應鏈管理", "value": 3, "feasibility": 4, "type": "defend"},
+    {"name": "GenAI 工程知識助手", "capability": "人才管理", "value": 3, "feasibility": 5, "type": "defend"},
+    {"name": "AI 輔助製程/PPA 探索（DTCO）", "capability": "製程技術研發", "value": 5, "feasibility": 3, "type": "upend"},
+    {"name": "AI 封裝與熱模擬", "capability": "先進封裝", "value": 4, "feasibility": 3, "type": "extend"},
+    {"name": "AI 客服／IR 助手", "capability": "—（back office）", "value": 2, "feasibility": 5, "type": "defend"},
+    {"name": "全自動 lights-out 決策", "capability": "晶圓製造", "value": 5, "feasibility": 1, "type": "upend"}
+  ],
+  "readiness": [
+    {"dim": "戰略", "current": 4, "future": 5},
+    {"dim": "價值", "current": 3, "future": 5},
+    {"dim": "組織", "current": 4, "future": 4},
+    {"dim": "人才文化", "current": 3, "future": 5},
+    {"dim": "治理", "current": 4, "future": 5},
+    {"dim": "AI 工程", "current": 4, "future": 5},
+    {"dim": "AI 資料", "current": 3, "future": 5}
+  ],
+  "notes": [
+    "use case 的 value／feasibility 與 readiness 分數為示範性估計（外部視角），非 TSMC 內部評分——真實評分必須由組織自己打。",
+    "type（Defend／Extend／Upend）依公開策略推定；「全自動 lights-out」落在 calculated risk，呼應 note 1：Level 1 全自動在 end-to-end 是科幻，一個自動決策出錯會擴散。",
+    "readiness 看 gap 不看分數：價值／人才文化／AI 資料 gap +2 最大，是最該補的功。"
+  ]
+}

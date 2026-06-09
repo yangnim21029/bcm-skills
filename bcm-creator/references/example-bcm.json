@@ -1,0 +1,45 @@
+{
+  "_note": "Illustrative BCM JSON structure (a fictional digital bank) showing the shape the IMAGE brief consumes — the BCM is a picture, not HTML. tiers/domains are the BOTTOM-UP aggregation of concrete capabilities, not a pre-drawn top taxonomy. Standalone example; the BCM-input brief example (example-bcm-input.json) is a different company (TSMC).",
+  "title": "信達數位銀行 Business Capability Map",
+  "subtitle": "純網路銀行 · pace layer 戰略地位（衝 AI 差異化視角，示範）",
+  "perspective": "信達數位銀行自己，衝 AI 差異化",
+  "tiers": [
+    {"name": "策略層", "domains": [
+      {"name": "經營治理", "capabilities": [
+        {"label": "策略管理", "pace": "keep_up"},
+        {"label": "法遵監理", "pace": "keep_up"},
+        {"label": "風險管理", "pace": "keep_up"}
+      ]}
+    ]},
+    {"name": "核心層", "domains": [
+      {"name": "資金與信用", "capabilities": [
+        {"label": "授信審核", "pace": "differentiating", "ai": true, "l2": ["信用評分", "額度核定"]},
+        {"label": "額度管理", "pace": "keep_up"},
+        {"label": "催收管理", "pace": "keep_up"}
+      ]},
+      {"name": "存匯與支付", "capabilities": [
+        {"label": "存款管理", "pace": "commodity"},
+        {"label": "支付清算", "pace": "keep_up"},
+        {"label": "跨境匯款", "pace": "keep_up"}
+      ]},
+      {"name": "財富與通路", "capabilities": [
+        {"label": "理財顧問", "pace": "differentiating", "ai": true},
+        {"label": "數位通路", "pace": "differentiating", "ai": true},
+        {"label": "客戶關係", "pace": "keep_up"}
+      ]}
+    ]},
+    {"name": "支援層", "domains": [
+      {"name": "風控合規", "capabilities": [
+        {"label": "KYC", "pace": "keep_up"},
+        {"label": "反洗錢 AML", "pace": "keep_up"},
+        {"label": "詐欺偵測", "pace": "differentiating", "ai": true}
+      ]},
+      {"name": "資料與營運", "capabilities": [
+        {"label": "核心系統", "pace": "commodity"},
+        {"label": "資料治理", "pace": "commodity", "enabling": true},
+        {"label": "資安", "pace": "keep_up"},
+        {"label": "人才管理", "pace": "commodity"}
+      ]}
+    ]}
+  ]
+}

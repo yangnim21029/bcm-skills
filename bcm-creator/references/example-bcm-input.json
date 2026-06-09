@@ -1,0 +1,179 @@
+{
+  "company": "台積電 TSMC",
+  "tagline": "BCM 輸入功課 · 衝 AI 製程領先視角",
+  "as_of": "2026-06",
+  "classification": "公開資料彙整",
+  "facts": [
+    {
+      "k": "產業",
+      "v": "半導體晶圓代工 (pure-play foundry)"
+    },
+    {
+      "k": "2025 營收",
+      "v": "約 US$120.95B，YoY +31.6%；毛利率 59.9%"
+    },
+    {
+      "k": "代工市佔",
+      "v": "約 69.9%（Q4 70.4%）；Samsung 7.2%"
+    },
+    {
+      "k": "領先製程",
+      "v": "N2 (2nm, GAA) 2025 Q4 量產；A16 2H 2026"
+    }
+  ],
+  "context": "台積電是全球最大、製程最領先的純晶圓代工廠：只製造、不設計、不賣品牌晶片，「不與客戶競爭」撐起它的信任基礎。2025 年 AI/HPC 已超越智慧型手機，成為最大平台。以下不寫一般公司簡介，而是依 note 1 的 BCM 輸入欄位整理：頂列放戰略目標，主體放能力清單與 metadata。",
+  "objectives": [
+    {
+      "name": "製程世代領先",
+      "kpi": "領先節點量產時程（N2 已量產、A16 2H26）；同功耗 PPA 領先"
+    },
+    {
+      "name": "AI／HPC 營收成長",
+      "kpi": "HPC 營收佔比（2025 達 58%）；AI 加速器 2024–29 CAGR mid-to-high 50%"
+    },
+    {
+      "name": "先進封裝供給",
+      "kpi": "CoWoS 月產能（2026 目標約 130K）"
+    },
+    {
+      "name": "全球產能韌性",
+      "kpi": "海外廠良率與獲利（Arizona 首年獲利 US$514M）"
+    },
+    {
+      "name": "獲利與資本效率",
+      "kpi": "毛利率（2025 59.9%）；capex 效率（2026 capex US$52–56B）"
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "製程技術研發",
+      "level": "L1",
+      "role": "realizing",
+      "ai": true,
+      "definition": "開發新節點與電晶體架構（GAA nanosheet、背面供電 Super Power Rail）",
+      "kpi": "節點領先時程、PPA"
+    },
+    {
+      "name": "晶圓製造",
+      "level": "L1",
+      "role": "realizing",
+      "definition": "量產先進與成熟節點晶圓",
+      "kpi": "產出、準交率"
+    },
+    {
+      "name": "良率管理與製程整合",
+      "level": "L1",
+      "role": "realizing",
+      "ai": true,
+      "definition": "拉升 yield、收斂缺陷，用量測檢測回饋製程",
+      "kpi": "良率 %"
+    },
+    {
+      "name": "先進封裝",
+      "level": "L1",
+      "role": "realizing",
+      "ai": true,
+      "definition": "以 CoWoS／SoIC／InFO 2.5D/3D 封裝整合 chiplet 與 HBM",
+      "kpi": "CoWoS 月產能、準交"
+    },
+    {
+      "name": "客戶設計賦能",
+      "level": "L1",
+      "role": "realizing",
+      "definition": "經營 OIP 生態系，提供 PDK／IP／EDA 認證以縮短客戶導入",
+      "kpi": "設計導入時間、tape-out 數"
+    },
+    {
+      "name": "產能規劃與配置",
+      "level": "L1",
+      "role": "realizing",
+      "definition": "決定產能投資、配置客戶產能",
+      "kpi": "產能利用率"
+    },
+    {
+      "name": "全球製造布局",
+      "level": "L1",
+      "role": "realizing",
+      "definition": "在海外建廠並營運（Arizona／Japan／Germany）",
+      "kpi": "海外廠良率、獲利"
+    },
+    {
+      "name": "光罩製作",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "製作 mask／reticle",
+      "kpi": "光罩準交、品質"
+    },
+    {
+      "name": "供應鏈管理",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "協調設備、材料、特殊氣體與 HBM 供應",
+      "kpi": "供應穩定度、成本"
+    },
+    {
+      "name": "廠務與設備工程",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "維運無塵室、廠務系統與設備",
+      "kpi": "設備稼動率"
+    },
+    {
+      "name": "品質與可靠度",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "驗證可靠度、運作品質管理系統",
+      "kpi": "缺陷率、客訴"
+    },
+    {
+      "name": "資本支出與財務管理",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "規劃 capex、管理折舊與財務",
+      "kpi": "capex 效率、毛利率"
+    },
+    {
+      "name": "智財與資安",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "保護製程機密與 IP，守住資訊安全",
+      "kpi": "洩密事件、稽核結果"
+    },
+    {
+      "name": "法遵與出口管制",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "因應出口管制與關稅，落實法規遵循",
+      "kpi": "合規達成"
+    },
+    {
+      "name": "人才管理",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "招募、培訓、留住人才（含海外派遣）",
+      "kpi": "到位率、留任率"
+    },
+    {
+      "name": "永續 ESG",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "管理能源、用水、淨零與環境治理",
+      "kpi": "再生能源 %、用水回收率"
+    }
+  ],
+  "notes": [
+    "objectives 的達成值（58%、59.9%、US$514M 等）取自公開財報；各能力的「產業典型 KPI」只是通用指標名，非台積電內部目標值（note 1, L106）。",
+    "pace layer 是「對某 objective」的戰略判斷，此處取「衝 AI 製程領先」視角；換目標，顏色就會變（note 1, L124）。",
+    "內部 metadata（owner／supporting systems／data in-out／data readiness 1–5）非公開，全欄待補（note 1, L256–262）。",
+    "最大客戶（NVIDIA vs Apple）、2025 營收口徑等爭議數字，見公司背景版簡報的資料註記。"
+  ],
+  "sources": [
+    "TSMC 2025 Annual Report (investor.tsmc.com)",
+    "TSMC 4Q25 results, SEC filing (sec.gov)",
+    "TrendForce 2025 foundry market share",
+    "Tom's Hardware — TSMC N2 volume production (2nm, GAA)",
+    "DIGITIMES — CoWoS/SoIC capacity 2026",
+    "TechTimes — TSMC Arizona year-one profit US$514M",
+    "DataCenterDynamics — TSMC 2026 capex US$52–56B"
+  ]
+}
