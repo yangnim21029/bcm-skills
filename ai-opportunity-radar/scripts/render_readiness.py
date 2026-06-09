@@ -51,7 +51,7 @@ def spider(rd):
         anchor = "middle" if abs(lx - CX) < 30 else ("start" if lx > CX else "end")
         gap = fut[i] - cur[i]
         out.append(f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anchor}" font-size="12" font-weight="700" fill="#1a1d21">{esc(d["dim"])}</text>')
-        out.append(f'<text x="{lx:.1f}" y="{ly+15:.1f}" text-anchor="{anchor}" font-size="10.5" fill="#8b929a">{cur[i]:g}→{fut[i]:g}（gap {gap:+g}）</text>')
+        out.append(f'<text x="{lx:.1f}" y="{ly+15:.1f}" text-anchor="{anchor}" font-size="10.5" fill="#8b929a">{cur[i]:g}→{fut[i]:g} (gap {gap:+g})</text>')
     # future (dashed) then current (filled) so current sits on top
     out.append(f'<polygon points="{poly(fut, n)}" fill="{ORANGE}" fill-opacity="0.10" stroke="{ORANGE}" stroke-width="2" stroke-dasharray="7 5"/>')
     out.append(f'<polygon points="{poly(cur, n)}" fill="{NAVY}" fill-opacity="0.18" stroke="{NAVY}" stroke-width="2"/>')
@@ -62,10 +62,10 @@ def spider(rd):
         out.append(f'<circle cx="{fx2:.1f}" cy="{fy2:.1f}" r="3.5" fill="{ORANGE}"/>')
     # legend
     out.append(f'<rect x="40" y="612" width="16" height="10" fill="{NAVY}" fill-opacity="0.18" stroke="{NAVY}" stroke-width="2"/>')
-    out.append(f'<text x="62" y="621" font-size="12" fill="#2b2f35">current 現況</text>')
+    out.append(f'<text x="62" y="621" font-size="12" fill="#2b2f35">current</text>')
     out.append(f'<rect x="190" y="612" width="16" height="10" fill="{ORANGE}" fill-opacity="0.10" stroke="{ORANGE}" stroke-width="2" stroke-dasharray="5 4"/>')
-    out.append(f'<text x="212" y="621" font-size="12" fill="#2b2f35">future 目標</text>')
-    out.append(f'<text x="350" y="621" font-size="12" font-weight="700" fill="#8b929a">看 gap，不看分數</text>')
+    out.append(f'<text x="212" y="621" font-size="12" fill="#2b2f35">future</text>')
+    out.append(f'<text x="350" y="621" font-size="12" font-weight="700" fill="#8b929a">Read the gap, not the score</text>')
     out.append("</svg>")
     return "\n".join(out)
 
@@ -78,7 +78,7 @@ def gap_table(rd):
         rows += (f'<tr><td>{esc(d["dim"])}</td><td style="text-align:center">{float(d["current"]):g}</td>'
                  f'<td style="text-align:center">{float(d["future"]):g}</td>'
                  f'<td style="color:#d9701b;font-weight:700">+{gap:g} {bar}</td></tr>')
-    return ('<table class="gap"><thead><tr><th>維度</th><th>現況</th><th>目標</th><th>gap（要補的功）</th></tr></thead>'
+    return ('<table class="gap"><thead><tr><th>Dimension</th><th>Current</th><th>Future</th><th>Gap (work to do)</th></tr></thead>'
             f'<tbody>{rows}</tbody></table>')
 
 
@@ -105,13 +105,13 @@ def render(spec):
     notes_html = ""
     if notes:
         items = "".join(f"<li>{esc(n)}</li>" for n in notes)
-        notes_html = f'<div class="notes"><b>資料註記</b><ul>{items}</ul></div>'
+        notes_html = f'<div class="notes"><b>Data notes</b><ul>{items}</ul></div>'
     return (
-        f'<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">'
+        f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
         f'<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{company} — AI Readiness</title><style>{CSS}</style></head><body>'
-        f'<p class="kicker">AI Readiness · 7 維 current vs future</p><h1>{company} — AI 就緒度（看 gap）</h1>'
-        f'<p class="meta">重點是 current→future 的 gap，不是當前分數｜{as_of}</p>'
+        f'<p class="kicker">AI Readiness · 7 dimensions current vs future</p><h1>{company} — AI Readiness (read the gap)</h1>'
+        f'<p class="meta">The point is the current→future gap, not the current score｜{as_of}</p>'
         f'<div class="wrap"><div class="frame">{spider(rd)}</div><div>{gap_table(rd)}</div></div>{notes_html}</body></html>'
     )
 

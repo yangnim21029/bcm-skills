@@ -18,9 +18,9 @@ import sys
 from pathlib import Path
 
 TYPE = {  # business-case type -> (colour, label)
-    "defend": ("#1f3a5f", "Defend（augment、ROI 穩）"),
-    "extend": ("#d9701b", "Extend（改流程、有方案）"),
-    "upend":  ("#7a3e9d", "Upend（顛覆、高風險高回報）"),
+    "defend": ("#1f3a5f", "Defend (augment, steady ROI)"),
+    "extend": ("#d9701b", "Extend (reshape process, solution exists)"),
+    "upend":  ("#7a3e9d", "Upend (disruptive, high risk / high reward)"),
 }
 X0, X1, Y0, Y1 = 80, 660, 64, 556          # plot box (svg coords)
 SVGW, SVGH = 930, 600
@@ -47,7 +47,7 @@ def svg(spec):
     out.append(f'<rect x="{X0}" y="{midy:.0f}" width="{X1-X0}" height="{Y1-midy:.0f}" fill="#f1f2f4"/>')         # marginal gains
     out.append(f'<text x="{X1-8:.0f}" y="{Y0+18}" text-anchor="end" font-size="12" font-weight="700" fill="#3f7d3a">Likely wins</text>')
     out.append(f'<text x="{X0+8:.0f}" y="{Y0+18}" font-size="12" font-weight="700" fill="#b07d1a">Calculated risks</text>')
-    out.append(f'<text x="{X0+8:.0f}" y="{Y1-10:.0f}" font-size="12" font-weight="700" fill="#8b929a">Marginal gains（別分心）</text>')
+    out.append(f'<text x="{X0+8:.0f}" y="{Y1-10:.0f}" font-size="12" font-weight="700" fill="#8b929a">Marginal gains (don\'t get distracted)</text>')
     # gridlines + ticks
     for n in (1, 2, 3, 4, 5):
         gx, gy = fx(n), fy(n)
@@ -57,8 +57,8 @@ def svg(spec):
         out.append(f'<text x="{X0-10}" y="{gy+4:.0f}" text-anchor="end" font-size="11" fill="#8b929a">{n}</text>')
     # axes frame + labels
     out.append(f'<rect x="{X0}" y="{Y0}" width="{X1-X0}" height="{Y1-Y0}" fill="none" stroke="#1a1d21" stroke-width="1.5"/>')
-    out.append(f'<text x="{(X0+X1)/2:.0f}" y="{Y1+40:.0f}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a1d21">Feasibility 可行性（技術 + 內部成熟度）→</text>')
-    out.append(f'<text transform="translate({X0-44},{(Y0+Y1)/2:.0f}) rotate(-90)" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a1d21">Value 價值（對經營目標的貢獻）→</text>')
+    out.append(f'<text x="{(X0+X1)/2:.0f}" y="{Y1+40:.0f}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a1d21">Feasibility (tech + internal readiness) →</text>')
+    out.append(f'<text transform="translate({X0-44},{(Y0+Y1)/2:.0f}) rotate(-90)" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1a1d21">Value (contribution to objective) →</text>')
     # dots
     for uc in spec.get("use_cases", []):
         color = TYPE.get(uc.get("type", "extend"), TYPE["extend"])[0]
@@ -75,11 +75,11 @@ def svg(spec):
         out.append(f'<circle cx="{lx+7}" cy="{yy-4}" r="7" fill="{c}"/>')
         out.append(f'<text x="{lx+22}" y="{yy}" font-size="11.5" fill="#2b2f35">{esc(lab)}</text>')
     out.append(f'<text x="{lx}" y="{ly+104}" font-size="12" font-weight="700" fill="#565d66">Zones</text>')
-    zones = ["Likely wins → 馬上做", "Calculated risks → 小規模試", "Marginal gains → 別分心"]
+    zones = ["Likely wins → do now", "Calculated risks → small-scale pilot", "Marginal gains → don't get distracted"]
     for i, z in enumerate(zones):
         out.append(f'<text x="{lx}" y="{ly+126+i*20}" font-size="11.5" fill="#2b2f35">{esc(z)}</text>')
-    out.append(f'<text x="{lx}" y="{ly+210}" font-size="11" fill="#8b929a">釘在 capability，不釘在</text>')
-    out.append(f'<text x="{lx}" y="{ly+226}" font-size="11" fill="#8b929a">use case 本身（note 1）</text>')
+    out.append(f'<text x="{lx}" y="{ly+210}" font-size="11" fill="#8b929a">Pin to the capability, not to</text>')
+    out.append(f'<text x="{lx}" y="{ly+226}" font-size="11" fill="#8b929a">the use case itself (note 1)</text>')
     out.append("</svg>")
     return "\n".join(out)
 
@@ -104,13 +104,13 @@ def render(spec):
     notes_html = ""
     if notes:
         items = "".join(f"<li>{esc(n)}</li>" for n in notes)
-        notes_html = f'<div class="notes"><b>資料註記</b><ul>{items}</ul></div>'
+        notes_html = f'<div class="notes"><b>Data notes</b><ul>{items}</ul></div>'
     return (
-        f'<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">'
+        f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
         f'<meta name="viewport" content="width=device-width, initial-scale=1">'
         f'<title>{company} — AI Opportunity Radar</title><style>{CSS}</style></head><body>'
-        f'<p class="kicker">AI Opportunity Radar · BCM × use case</p><h1>{company} — AI 機會雷達</h1>'
-        f'<p class="meta">Value × Feasibility，dot 顏色＝Defend/Extend/Upend｜{as_of}</p>'
+        f'<p class="kicker">AI Opportunity Radar · BCM × use case</p><h1>{company} — AI Opportunity Radar</h1>'
+        f'<p class="meta">Value × Feasibility, dot colour = Defend/Extend/Upend｜{as_of}</p>'
         f'<div class="frame">{svg(spec)}</div>{notes_html}</body></html>'
     )
 

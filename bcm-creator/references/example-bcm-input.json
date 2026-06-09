@@ -1,171 +1,171 @@
 {
-  "company": "台積電 TSMC",
-  "tagline": "BCM 輸入功課 · 衝 AI 製程領先視角",
+  "company": "TSMC",
+  "tagline": "BCM Input Brief · AI process-leadership perspective",
   "as_of": "2026-06",
-  "classification": "公開資料彙整",
+  "classification": "Compiled from public sources",
   "facts": [
     {
-      "k": "產業",
-      "v": "半導體晶圓代工 (pure-play foundry)"
+      "k": "Industry",
+      "v": "Semiconductor wafer foundry (pure-play foundry)"
     },
     {
-      "k": "2025 營收",
-      "v": "約 US$120.95B，YoY +31.6%；毛利率 59.9%"
+      "k": "2025 revenue",
+      "v": "approx. US$120.95B, YoY +31.6%; gross margin 59.9%"
     },
     {
-      "k": "代工市佔",
-      "v": "約 69.9%（Q4 70.4%）；Samsung 7.2%"
+      "k": "Foundry market share",
+      "v": "approx. 69.9% (Q4 70.4%); Samsung 7.2%"
     },
     {
-      "k": "領先製程",
-      "v": "N2 (2nm, GAA) 2025 Q4 量產；A16 2H 2026"
+      "k": "Leading process",
+      "v": "N2 (2nm, GAA) volume production 2025 Q4; A16 2H 2026"
     }
   ],
-  "context": "台積電是全球最大、製程最領先的純晶圓代工廠：只製造、不設計、不賣品牌晶片，「不與客戶競爭」撐起它的信任基礎。2025 年 AI/HPC 已超越智慧型手機，成為最大平台。以下不寫一般公司簡介，而是依 note 1 的 BCM 輸入欄位整理：頂列放戰略目標，主體放能力清單與 metadata。",
+  "context": "TSMC is the world's largest and most process-advanced pure-play wafer foundry: it only manufactures — it does not design or sell branded chips, and its \"we don't compete with our customers\" stance is the foundation of its trust. In 2025, AI/HPC overtook smartphones to become its largest platform. The following is not a generic company profile but is organized by note 1's BCM input fields: business objectives at the top row, with the capability inventory and metadata as the body.",
   "objectives": [
     {
-      "name": "製程世代領先",
-      "kpi": "領先節點量產時程（N2 已量產、A16 2H26）；同功耗 PPA 領先"
+      "name": "Process-generation leadership",
+      "kpi": "Leading-node volume-production timeline (N2 in production, A16 2H26); PPA lead at equal power"
     },
     {
-      "name": "AI／HPC 營收成長",
-      "kpi": "HPC 營收佔比（2025 達 58%）；AI 加速器 2024–29 CAGR mid-to-high 50%"
+      "name": "AI / HPC revenue growth",
+      "kpi": "HPC revenue share (58% in 2025); AI accelerators 2024–29 CAGR mid-to-high 50%"
     },
     {
-      "name": "先進封裝供給",
-      "kpi": "CoWoS 月產能（2026 目標約 130K）"
+      "name": "Advanced-packaging supply",
+      "kpi": "CoWoS monthly capacity (2026 target approx. 130K)"
     },
     {
-      "name": "全球產能韌性",
-      "kpi": "海外廠良率與獲利（Arizona 首年獲利 US$514M）"
+      "name": "Global capacity resilience",
+      "kpi": "Overseas-fab yield and profitability (Arizona first-year profit US$514M)"
     },
     {
-      "name": "獲利與資本效率",
-      "kpi": "毛利率（2025 59.9%）；capex 效率（2026 capex US$52–56B）"
+      "name": "Profitability and capital efficiency",
+      "kpi": "Gross margin (59.9% in 2025); capex efficiency (2026 capex US$52–56B)"
     }
   ],
   "capabilities": [
     {
-      "name": "製程技術研發",
+      "name": "Process technology R&D",
       "level": "L1",
       "role": "realizing",
       "ai": true,
-      "definition": "開發新節點與電晶體架構（GAA nanosheet、背面供電 Super Power Rail）",
-      "kpi": "節點領先時程、PPA"
+      "definition": "Develop new nodes and transistor architectures (GAA nanosheet, backside power delivery Super Power Rail)",
+      "kpi": "Node leadership timeline, PPA"
     },
     {
-      "name": "晶圓製造",
+      "name": "Wafer fabrication",
       "level": "L1",
       "role": "realizing",
-      "definition": "量產先進與成熟節點晶圓",
-      "kpi": "產出、準交率"
+      "definition": "Volume-produce advanced and mature-node wafers",
+      "kpi": "Output, on-time delivery"
     },
     {
-      "name": "良率管理與製程整合",
-      "level": "L1",
-      "role": "realizing",
-      "ai": true,
-      "definition": "拉升 yield、收斂缺陷，用量測檢測回饋製程",
-      "kpi": "良率 %"
-    },
-    {
-      "name": "先進封裝",
+      "name": "Yield management and process integration",
       "level": "L1",
       "role": "realizing",
       "ai": true,
-      "definition": "以 CoWoS／SoIC／InFO 2.5D/3D 封裝整合 chiplet 與 HBM",
-      "kpi": "CoWoS 月產能、準交"
+      "definition": "Drive up yield, converge defects, feed metrology and inspection back into the process",
+      "kpi": "Yield %"
     },
     {
-      "name": "客戶設計賦能",
+      "name": "Advanced packaging",
       "level": "L1",
       "role": "realizing",
-      "definition": "經營 OIP 生態系，提供 PDK／IP／EDA 認證以縮短客戶導入",
-      "kpi": "設計導入時間、tape-out 數"
+      "ai": true,
+      "definition": "Integrate chiplets and HBM via CoWoS / SoIC / InFO 2.5D/3D packaging",
+      "kpi": "CoWoS monthly capacity, on-time delivery"
     },
     {
-      "name": "產能規劃與配置",
+      "name": "Customer design enablement",
       "level": "L1",
       "role": "realizing",
-      "definition": "決定產能投資、配置客戶產能",
-      "kpi": "產能利用率"
+      "definition": "Run the OIP ecosystem, provide PDK / IP / EDA certification to shorten customer ramp-up",
+      "kpi": "Design ramp-up time, tape-out count"
     },
     {
-      "name": "全球製造布局",
+      "name": "Capacity planning and allocation",
       "level": "L1",
       "role": "realizing",
-      "definition": "在海外建廠並營運（Arizona／Japan／Germany）",
-      "kpi": "海外廠良率、獲利"
+      "definition": "Decide capacity investment, allocate capacity to customers",
+      "kpi": "Capacity utilization"
     },
     {
-      "name": "光罩製作",
+      "name": "Global manufacturing footprint",
       "level": "L1",
-      "role": "enabling",
-      "definition": "製作 mask／reticle",
-      "kpi": "光罩準交、品質"
+      "role": "realizing",
+      "definition": "Build and operate overseas fabs (Arizona / Japan / Germany)",
+      "kpi": "Overseas-fab yield, profitability"
     },
     {
-      "name": "供應鏈管理",
+      "name": "Mask making",
       "level": "L1",
       "role": "enabling",
-      "definition": "協調設備、材料、特殊氣體與 HBM 供應",
-      "kpi": "供應穩定度、成本"
+      "definition": "Produce masks / reticles",
+      "kpi": "Mask on-time delivery, quality"
     },
     {
-      "name": "廠務與設備工程",
+      "name": "Supply chain management",
       "level": "L1",
       "role": "enabling",
-      "definition": "維運無塵室、廠務系統與設備",
-      "kpi": "設備稼動率"
+      "definition": "Coordinate supply of equipment, materials, specialty gases, and HBM",
+      "kpi": "Supply stability, cost"
     },
     {
-      "name": "品質與可靠度",
+      "name": "Facilities and equipment engineering",
       "level": "L1",
       "role": "enabling",
-      "definition": "驗證可靠度、運作品質管理系統",
-      "kpi": "缺陷率、客訴"
+      "definition": "Operate and maintain cleanrooms, facility systems, and equipment",
+      "kpi": "Equipment availability"
     },
     {
-      "name": "資本支出與財務管理",
+      "name": "Quality and reliability",
       "level": "L1",
       "role": "enabling",
-      "definition": "規劃 capex、管理折舊與財務",
-      "kpi": "capex 效率、毛利率"
+      "definition": "Validate reliability, run the quality management system",
+      "kpi": "Defect rate, customer complaints"
     },
     {
-      "name": "智財與資安",
+      "name": "Capital expenditure and financial management",
       "level": "L1",
       "role": "enabling",
-      "definition": "保護製程機密與 IP，守住資訊安全",
-      "kpi": "洩密事件、稽核結果"
+      "definition": "Plan capex, manage depreciation and finance",
+      "kpi": "Capex efficiency, gross margin"
     },
     {
-      "name": "法遵與出口管制",
+      "name": "IP and information security",
       "level": "L1",
       "role": "enabling",
-      "definition": "因應出口管制與關稅，落實法規遵循",
-      "kpi": "合規達成"
+      "definition": "Protect process secrets and IP, defend information security",
+      "kpi": "Leak incidents, audit results"
     },
     {
-      "name": "人才管理",
+      "name": "Compliance and export control",
       "level": "L1",
       "role": "enabling",
-      "definition": "招募、培訓、留住人才（含海外派遣）",
-      "kpi": "到位率、留任率"
+      "definition": "Respond to export controls and tariffs, enforce regulatory compliance",
+      "kpi": "Compliance attainment"
     },
     {
-      "name": "永續 ESG",
+      "name": "Talent management",
       "level": "L1",
       "role": "enabling",
-      "definition": "管理能源、用水、淨零與環境治理",
-      "kpi": "再生能源 %、用水回收率"
+      "definition": "Recruit, train, and retain talent (including overseas assignments)",
+      "kpi": "Fill rate, retention rate"
+    },
+    {
+      "name": "Sustainability ESG",
+      "level": "L1",
+      "role": "enabling",
+      "definition": "Manage energy, water, net-zero, and environmental governance",
+      "kpi": "Renewable energy %, water recycling rate"
     }
   ],
   "notes": [
-    "objectives 的達成值（58%、59.9%、US$514M 等）取自公開財報；各能力的「產業典型 KPI」只是通用指標名，非台積電內部目標值（note 1, L106）。",
-    "pace layer 是「對某 objective」的戰略判斷，此處取「衝 AI 製程領先」視角；換目標，顏色就會變（note 1, L124）。",
-    "內部 metadata（owner／supporting systems／data in-out／data readiness 1–5）非公開，全欄待補（note 1, L256–262）。",
-    "最大客戶（NVIDIA vs Apple）、2025 營收口徑等爭議數字，見公司背景版簡報的資料註記。"
+    "The objectives' attainment values (58%, 59.9%, US$514M, etc.) come from public financial reports; each capability's \"industry-typical KPI\" is only a generic metric name, not a TSMC internal target value (note 1, L106).",
+    "Pace layer is a strategic judgment \"relative to a given objective\"; here it takes the \"push AI process leadership\" perspective. Change the objective and the colours change (note 1, L124).",
+    "Internal metadata (owner / supporting systems / data in-out / data readiness 1–5) is not public — all fields TBD (note 1, L256–262).",
+    "Disputed figures such as the largest customer (NVIDIA vs Apple) and the 2025 revenue basis are covered in the data notes of the company-context brief."
   ],
   "sources": [
     "TSMC 2025 Annual Report (investor.tsmc.com)",

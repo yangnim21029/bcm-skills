@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render a BCM-INPUT BRIEF to a self-contained corporate-briefing HTML file.
 
-This is the "功課 / homework" deliverable of bcm-creator. Its content is exactly
+This is the "homework" deliverable of bcm-creator. Its content is exactly
 what note 1 (the Gartner BCM webinar) says a BCM needs — NOT a generic company
 profile, and NOT the BCM picture itself (that is generated as an image):
 
@@ -10,14 +10,14 @@ profile, and NOT the BCM picture itself (that is generated as an image):
     (note 1, L100-102), each row a metadata card (note 1, L256-258):
       public fields:   definition, level, industry-typical KPI, AI pin
       internal fields: owner, supporting systems, data in/out, data readiness 1-5
-                       — NOT public; shown as 待補 for the org to fill (note 1, L258/262)
+                       — NOT public; shown as TBD for the org to fill (note 1, L258/262)
   - a short company-context paragraph for orientation
 
 NOTE: pace layer is deliberately NOT in this list. It is a strategic OVERLAY
-(note 1, L120-126, 底圖 vs 疊加層) decided when you draw the MAP — it lives on
+(note 1, L120-126, base map vs overlay) decided when you draw the MAP — it lives on
 the BCM image, not in the capability inventory.
 
-Style = corporate briefing (業界匯報): restrained ink + single accent, ruled
+Style = corporate briefing: restrained ink + single accent, ruled
 sections, scannable tables. No pastel cards.
 
 Usage:  render_bcm_input_html.py <brief.json> [out.html]
@@ -32,8 +32,8 @@ Schema:
     {"name": str, "level": str?, "role": "realizing"|"enabling",
      "ai": bool?, "definition": str, "kpi": str?}
   ],
-  "internal_fields_note": str?,                # defaults to the 待補 line
-  "notes": [str]?,                             # 資料註記 caveats
+  "internal_fields_note": str?,                # defaults to the TBD line
+  "notes": [str]?,                             # data-notes caveats
   "sources": [str]?
 }
 """
@@ -43,8 +43,8 @@ import sys
 from pathlib import Path
 
 DEFAULT_INTERNAL_NOTE = (
-    "每個能力另需一張內部 metadata 卡：owner（單一）、supporting systems、"
-    "data input/output、data readiness（1–5）。此四欄非公開資料，標「待補」由組織填（note 1, L256–262）。"
+    "Each capability also needs an internal metadata card: owner (single), supporting systems, "
+    "data input/output, data readiness (1–5). These four fields are not public — mark them \"TBD\" for the organization to fill (note 1, L256–262)."
 )
 
 CSS = """
@@ -106,7 +106,7 @@ def facts_table(facts):
 def context_section(ctx, idx):
     paras = ctx if isinstance(ctx, list) else [ctx]
     body = "".join(f"<p>{esc(p)}</p>" for p in paras)
-    return f'<section><h2><span class="num">{idx:02d}</span>公司背景</h2>{body}</section>'
+    return f'<section><h2><span class="num">{idx:02d}</span>Company context</h2>{body}</section>'
 
 
 def objectives_section(objs, idx):
@@ -115,13 +115,13 @@ def objectives_section(objs, idx):
         f'<span class="o-kpi">{esc(o.get("kpi",""))}</span></li>'
         for o in objs
     )
-    return (f'<section><h2><span class="num">{idx:02d}</span>戰略目標 Business Objectives'
-            f'<span class="tag">BCM 頂列</span></h2><ul class="obj">{items}</ul></section>')
+    return (f'<section><h2><span class="num">{idx:02d}</span>Business Objectives'
+            f'<span class="tag">BCM top row</span></h2><ul class="obj">{items}</ul></section>')
 
 
 def cap_table_section(caps, idx, title, tag, note):
-    head = ("<thead><tr><th>能力 Capability</th><th>層</th>"
-            "<th>定義（做什麼）</th><th>產業典型 KPI</th></tr></thead>")
+    head = ("<thead><tr><th>Capability</th><th>Level</th>"
+            "<th>Definition (what it does)</th><th>Industry-typical KPI</th></tr></thead>")
     rows = []
     for c in caps:
         ai = '<span class="aibadge">AI</span>' if c.get("ai") else ""
@@ -139,7 +139,7 @@ def cap_table_section(caps, idx, title, tag, note):
 
 def notes_section(notes, idx):
     items = "".join(f'<li><span class="o-kpi">{esc(n)}</span></li>' for n in notes)
-    return (f'<section><h2><span class="num">{idx:02d}</span>資料註記</h2>'
+    return (f'<section><h2><span class="num">{idx:02d}</span>Data notes</h2>'
             f'<ul class="obj">{items}</ul></section>')
 
 
@@ -163,24 +163,24 @@ def render(spec):
         enabling = [c for c in caps if c.get("role") != "realizing"]
         note = spec.get("internal_fields_note", DEFAULT_INTERNAL_NOTE)
         if realizing:
-            blocks.append(cap_table_section(realizing, idx, "能力清單 · 直接生值 value-realizing",
-                                            "BCM 左側 · 直接 deliver outcome", None)); idx += 1
+            blocks.append(cap_table_section(realizing, idx, "Capabilities · value-realizing",
+                                            "BCM left side · directly delivers outcome", None)); idx += 1
         if enabling:
-            blocks.append(cap_table_section(enabling, idx, "能力清單 · 養地基 value-enabling",
-                                            "BCM 底層 · 撐住別人、別砍", note)); idx += 1
+            blocks.append(cap_table_section(enabling, idx, "Capabilities · value-enabling",
+                                            "BCM base layer · holds others up, don't cut", note)); idx += 1
     if spec.get("notes"):
         blocks.append(notes_section(spec["notes"], idx)); idx += 1
 
     foot = ""
     if spec.get("sources"):
         items = "".join(f"<li>{esc(s)}</li>" for s in spec["sources"])
-        foot = f'<div class="foot"><b>來源 Sources</b><ul>{items}</ul></div>'
+        foot = f'<div class="foot"><b>Sources</b><ul>{items}</ul></div>'
 
     return (
-        "<!doctype html>\n<html lang=\"zh-Hant\">\n<head>\n<meta charset=\"utf-8\">\n"
+        "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-        f"<title>{company} — BCM 輸入功課</title>\n<style>{CSS}</style>\n</head>\n<body>\n"
-        f'<div class="doc-head">{classif_html}<p class="kicker">BCM 輸入功課 · Capability Map Inputs</p>'
+        f"<title>{company} — BCM Input Brief</title>\n<style>{CSS}</style>\n</head>\n<body>\n"
+        f'<div class="doc-head">{classif_html}<p class="kicker">BCM Input Brief · Capability Map Inputs</p>'
         f"<h1>{company}</h1>{meta_html}</div>\n"
         f"{facts_table(spec.get('facts'))}\n{''.join(blocks)}\n{foot}\n"
         "</body>\n</html>\n"
