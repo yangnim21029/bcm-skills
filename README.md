@@ -43,6 +43,10 @@ Then in Claude Code just ask in natural language — the skills trigger on inten
 
 Worked example specs ship in each skill's `references/` (`example-bcm-input.json`, `example-bcm.json`, `example-portfolio.json`) — run the renderers on them to see the output formats.
 
+The finished raster for the TSMC example (gpt-image-2 from `example-bcm.json`; labels in Traditional Chinese — the skill renders whatever language the spec uses):
+
+![TSMC example BCM — pace-layer colours, AI pins, dashed value-enabling tiles](bcm-creator/references/example-bcm.png)
+
 ## Credit & licensing
 
 Method distilled from the Gartner webinar *"Accelerate Your AI Journey With Business Capability Maps"* (Alexander Hoeppe, VP Analyst). Reference capability templates (APQC PCF, etc.) are **not** included — obtain your own per their licences. The skills, scripts, and method write-ups here are original work; add a LICENSE of your choice before redistributing.
