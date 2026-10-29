@@ -1,90 +1,63 @@
-# How to Use a BCM: use-case evaluation, readiness, value streams, and ongoing governance
+# Seven lenses for investment decisions
 
-> The companion reference `bcm-method-howto.md` teaches "how to draw a BCM." This one teaches "how to use it and how to keep it alive once it's drawn" — because a BCM is not a document you draw once and file away, it's an **ongoing governance backbone.** The method comes from note 1 (the source Gartner BCM webinar).
+Source: Gartner, Alexander Hoeppe, “Accelerate Your AI Journey With Business Capability Maps.” Time ranges locate the discussion; practical questions below explain implications rather than adding empirical claims.
 
-## 0. Drawing it isn't the finish line, it's the starting line
+## Execution · 00:07:38–00:08:39
 
-Once it's drawn, all you have is a base map. The value is in using it as "the unit of conversation for company-wide AI governance." The most common way it dies: the BCM gets built once, filed into SharePoint, and nobody looks at it for three years. **A BCM with no cadence is a dead map.**
+Trace data acquisition, usable judgment, workflow delivery, authority/resources and outcome. A model output does not establish that anyone can act in time. Identify the blocked handoff and the integration, operational or organizational change needed.
 
-## 1. The full chain: Capability → Value Stream → Process → IT system
+The source mentions obsolete equipment, poor data, weak integration and ten global ERP systems awaiting harmonization. These can alter local feasibility even when a standard AI product exists. Industry success does not establish a company's implementation readiness.
 
-A BCM lists capabilities only — it says nothing about sequence (like a box of Lego: you have the blocks but don't know which comes first). To operationalize it, connect downward:
+## Sustaining responsibility · 00:08:39–00:10:24
 
-- **Value Stream (also a kind of map)**: string capabilities into a flow — "to deliver outcome X, pass through A → B → C in order"; each capability on the flow has a KPI, an input, an output, and a dependency. **The BCM is the box; the value stream is the arrow.** You usually start from the BCM's L2–3 (L1 is too abstract to sequence).
-- **Process**: on a given value stream, how this capability actually runs.
-- **IT system**: the process maps further down to applications, data sources, and integrations.
+Distinguish data maintenance, operational response, outcome review and approval/implementation of changes. Several responsibilities may belong to one person, but each needs time, authority and recurring resources. Analyst-proposed roles are not confirmed appointments.
 
-Each layer aligns to the one above. Building a process model before the BCM is solid = building a house starting from the middle floor.
+The source discusses new roles, internal training, business/IT participation and vendors supplying tools and infrastructure. It does not reduce adoption to one end-user training event or mandate identical job titles everywhere.
 
-## 2. Digital Thread: making data governance = business governance
+## Changing decision questions · 00:18:17–00:21:40
 
-Map the value stream onto the data flow — every capability transition carries a transformation and movement of data. Follow it all the way: the "customer places an order" value stream triggers which table updates, which system calls, which model predictions. **A digital thread makes "data governance" and "business governance" the same thing, not two parallel lines.**
+Keep capability IDs stable when comparing goals. Reducing late delivery, lowering maintenance cost and developing new service revenue require different evidence and priorities. Show objective, period, constraints and success measures.
 
-## 3. One metadata card per capability (the real unit of governance)
+The source connects asset utilization to downtime and digital revenue to servitization/new-product measures. Switching those goals changes the assessment without removing other capabilities from the organization.
 
-A BCM is more than boxes. Each capability gets one card beneath it: **definition / responsible owner (single) / data input / data output / supporting systems.** A BCM with no metadata filled in is a decoration; fill it in and it can drive investment decisions, accountability, and cross-team communication.
+## Maintain, monitor or innovate · 00:21:40–00:22:56
 
-(These are exactly the four columns marked "TBD" in the bcm-creator input brief — owner / systems / data in-out are non-public and the organization has to fill them in itself. The input brief fills in the public half and leaves the slots ready for the internal data.)
+Commodity still needs reliable operation, maintenance and spending. Keep-up needs indicators, review and a response to gaps. Differentiating calls for testing changes that might materially help the goal; confirm the gap and potential benefit before choosing AI.
 
-## 4. Data readiness is contextual
+The source's white, light-blue and dark-blue manufacturing map expresses attention under selected objectives. It is not a maturity ladder, ROI guarantee or a “70% here, no money there” budget rule. Innovation still needs maintenance and monitoring.
 
-Readiness isn't "zero errors in the data," it's "what does each capability need from data, and does our structure support it?" Rated on a 1–5 scale. **The same dataset may be level 5 for capability A and level 2 for capability B.** A company that waits for data to be 100% clean before starting AI investment will never start.
+## Task-specific data conditions · 00:24:48–00:25:33; 00:54:46–00:57:21
 
-## 5. BCM × use case: pin AI on capabilities (Opportunity Radar)
+Start with the judgment being made. Identify inputs, linked outcomes when relevant, identifiers/timestamps, response time, access, production availability, updates and responsibility. Data adequate for a threshold alert may be inadequate for learning failure patterns. Labeled failures are required by particular methods, not all AI.
 
-With a BCM in hand, map your AI use cases onto it (the **AI Opportunity Radar**, four quadrants: core capability / back office / product & services / front office). **Pin on the capability, not on the use case itself** — a use case goes stale in six months, a capability holds for three to five years. You see at a glance where investment is concentrated, what's being ignored, and whether the portfolio is balanced.
+The source links industrial data management to predictive maintenance. Represent that dependency in work sequencing and cost comparisons without requiring all enterprise data to be cleaned before any prototype.
 
-## 6. Break every use case into 6 agent dimensions
+## Function versus full capability · 00:30:59–00:32:42
 
-To evaluate a use case's — or a vendor's — agent, break it into 6 dimensions: **Perception (see / hear / read), Decisioning, Actioning, Agency (degree of autonomy), Adaptability, Knowledge (knowledge access).** Most use cases only need 2–3 of these to be strong. Evaluating against these 6 dimensions is ten times more reliable than listening to a vendor say "we have agentic AI."
+Separate detection, decision, action and confirmation. A reliable alert may leave the bottleneck in approval, procurement or delivery. Compare AI with process/resource alternatives, and distinguish an enterprise capability jointly performed by people/tools from a system acting independently.
 
-## 7. Agency warning: a wrong autonomous decision spreads
+The screw-container example alerts after 80% is consumed, leaving 20%. Automatic reordering adds purchasing action, but placing an order does not prove that supplier selection, delivery and exceptions are all autonomous.
 
-Agency is a 5-level spectrum, not an on/off switch. **Level 1 fully autonomous is science fiction in most industries** — an end-to-end value chain is too complex, and any single wrong autonomous decision spreads. A selective process (a single mechanical action) can be Level 1; end-to-end can't. Most enterprises reasonably stop at Level 3–4, and that's not a failure — it's pragmatism.
+## Authority versus performance · 00:32:42–00:35:27
 
-## 8. For every use case, get clear on: technology + data sources + integration engineering
+Separate function, authorization and demonstrated performance. Determine what a person can veto, when, what the system must report and who handles exceptions. Notification is not consent; a veto window is useful only if someone can notice, understand and respond.
 
-A use case is never built with "one AI." Before you sign off or evaluate, get clear on: **which AI technologies + which data sources + which integration engineering** it needs. Not every use case calls for Gen AI — picking wrong doesn't just waste money, it injects probabilistic behaviour into a deterministic process and ends up less accurate than the old system. Skip this clarity and the POC runs but production won't.
+When explaining this webinar's numbering, preserve it exactly:
 
-## 9. AI Readiness (7 dimensions, read the gap not the score)
+- Level 5: limited time to veto before automatic execution.
+- Level 4: automatic execution with mandatory notification.
+- Level 3: automatic execution, notification only when asked.
+- Level 2: automatic execution; the machine chooses whether to notify.
+- Level 1: autonomous decision/action ignoring humans in the discussed task scope.
 
-Before starting, assess readiness across 7 dimensions: **Strategy / Value / Organization / People & Culture / Governance / AI Engineering / AI Data**, each 1–5. **What matters is not the current score, it's the gap between current and future.** Most organizations mistake readiness for just two dimensions — "talent + data" — and overlook Strategy and Governance, which is the main reason they can't scale later. Future state is usually overestimated; it needs a case to back it, not a gut call. If you can't find a single example proving your vision is feasible, that's not a vision, it's a hallucination.
+Here smaller numbers mean fewer human-intervention conditions. These are not universal industry labels, accuracy scores or the five development bands of the six-dimension agent matrix. Do not declare a universal best level or infer an approved level from AI adoption.
 
-## 10. Tag every use case Defend / Extend / Upend (yes, really)
+## Portfolio and follow-through
 
-Yes, you tag the AI business case with one of these three:
+The opportunity radar shows strategic concentration; the value/feasibility matrix compares contribution and implementability. Keep those questions distinct. A supporting data project may be a prerequisite even if another application scores higher.
 
-- **Defend**: augment existing staff without changing the process structure; ROI is steady and easy to compute (AI writing code / JDs / copy). Low risk, low ceiling.
-- **Extend**: rewrite the process, with a vendor-packaged solution and computable ROI (customer-service automation, insurance claims auto-approval). The enterprise main battlefield.
-- **Upend**: the frontier, where even whether the value exists is uncertain (drug discovery). High risk, high return, needs patience capital.
+Readiness covers strategy, value, organization, people/culture, governance, engineering and data. Ground current and target states in evidence, retain unknowns and turn gaps into work. A large gap can reflect an unrealistic target; a high current score is not automatically complacency.
 
-A healthy portfolio mixes all three — bet everything on Defend and you have no differentiation in three years; bet everything on Upend and you burn through your cash.
+Defend concerns individual-work benefits, Extend team/process change, and Upend uncertain new value/markets. The webinar's 2024 costs are illustrative, not current quotations or guaranteed returns. No category assures stable ROI or prescribes portfolio allocation.
 
-## 11. AI strategy ≠ a subset of IT strategy
-
-AI's impact on the business model and the operating model runs too deep — it needs **independent planning.** A company with no AI strategy loses competitiveness; but a company with a **bad AI strategy gets actively hurt** (compliance, trust, customer experience). The BCM is the base map that carries the AI strategy.
-
-## 12. Bimodal: top-down meets bottom-up (the real reason POCs fail)
-
-- **Top-down (led by leadership)**: BCM, use-case prioritization, readiness assessment — strategic moves.
-- **Bottom-up (built hands-on by teams)**: POC, prototype, end-user pilot — operational moves.
-
-Both run at the same time, that's the point. **Many teams' POCs fail not because they couldn't build them, but because they were never connected to the BCM**: the POC goes live and then nobody keeps tracking it, and three months later nobody remembers where the KPI was set — because the KPI was never hung on any capability. The BCM is the pin that fastens the POC to the organization's backbone; top-down alone is PowerPoint governance, bottom-up alone is a headless chicken.
-
-## 13. The workflow for updating a BCM (cadence)
-
-A BCM is an ongoing governance backbone — **put it on the calendar and revisit it every quarter or every six months.** One review runs through these steps:
-
-1. **Re-rate pace** — is each capability's pace against the main objective still right? Was something keep up last year that every competitor has now gone AI on → promote to differentiating?
-2. **Use-case status** — has a use case on the radar moved from a calculated risk to a likely win (feasibility has matured)?
-3. **Readiness gap** — which capabilities' data / AI readiness improved, and which gaps closed?
-4. **Connect the POCs (the most commonly missed step)** — pin each POC that ran back to its corresponding capability + KPI; are the ones that went live still being tracked? Flag the untracked ones red.
-5. **Update metadata** — did the owner change? Did the supporting systems change? Did data readiness change?
-6. **Add / retire** — has a new business model brought out a new capability? Which capability has become a commodity (and should be outsourced)?
-7. **Regenerate the input brief + image** — if the data changed, re-run bcm-creator to update the input brief and the image, tagging the version and date.
-
-AI keeps changing, and a frozen BCM won't survive a year.
-
-## The aha
-
-What a BCM is really doing is pulling AI back from "one PoC in the IT department" to "company-wide strategic governance." A process map is too detailed, a product roadmap too narrow, a project plan too short — only the BCM is at once "abstract enough for the C-level to understand," "concrete enough to attach investment to," and "stable enough to carry a multi-year conversation." It doesn't replace your existing tools; it's the thread that strings them together. Without that thread, AI investment is forever a collection of island POCs; with it, AI investment is the compound growth of organizational capability.
+Connect AI plans to business, IT and data strategy. Pair top-down objectives with bottom-up prototypes and user feedback. Choose a suitable review cadence (the source mentions half-yearly/yearly reviews), revisiting assumptions when evidence changes. Survey failure percentages have specific denominators and allow multiple selections; they do not prove most POCs fail because they lack a BCM.

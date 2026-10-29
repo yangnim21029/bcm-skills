@@ -1,52 +1,49 @@
 ---
 name: ai-opportunity-radar
-description: Auto-generate the two "use the BCM" portfolio visuals from note 1 — an AI Opportunity Radar (AI use cases plotted on Value × Feasibility, coloured by Defend/Extend/Upend, pinned to BCM capabilities, zoned into Likely wins / Calculated risks / Marginal gains) and a 7-dimension AI Readiness gap chart (current vs future on Strategy / Value / Organization / People & Culture / Governance / AI Engineering / AI Data). Use this AFTER a BCM exists (it's the downstream step the [[bcm-creator]] map feeds), or whenever the user wants to prioritise AI use cases, map a use-case portfolio, score AI readiness, see the value/feasibility quadrant, plan where AI investment should go, or turn a capability map into an investment radar. Triggers: "AI opportunity radar", "prioritise use cases", "value feasibility quadrant", "AI readiness assessment", "put use cases on the BCM", "Defend/Extend/Upend", "draw a readiness radar". Renders precise data charts as self-contained HTML+SVG (deterministic), not raster.
+description: Assess AI options against a capability map, distinguish portfolio positioning from value/feasibility scoring, and explain readiness gaps, data dependencies and authority. Use for opportunity radars, AI prioritization, value/feasibility matrices and readiness reviews after capabilities and an objective are identified.
 ---
 
-# ai-opportunity-radar
+# AI Opportunity Assessment
 
-The downstream half of the BCM method: once you have a capability map ([[bcm-creator]]), this turns it into an **investment radar** and a **readiness gap chart** — the two visuals note 1 uses to decide *where AI goes* and *whether you're ready*. Full method context: `~/.claude/skills/bcm-creator/references/bcm-method-govern.md` (bundled with the bcm-creator skill).
+Connect each candidate to an objective, capability, specific problem, evidence, implementation needs and a way to check results. If no map exists, establish the relevant capabilities or use `bcm-creator`.
 
-## The two outputs
+For a new assessment, read [the structured interactive intake](references/interactive-intake.md) before external research or ranking. Reuse the current conversation and any `intake-record.json` from capability work; ask only the unanswered, decision-relevant questions in small rounds. Let the user identify directly available materials or explicitly skip. A skip leaves a provisional scope and gaps to investigate; it does not establish a business priority. Pure prose revisions do not restart this interview.
 
-1. **AI Opportunity Radar** — every AI use case plotted on **Value (y) × Feasibility (x)**, each dot coloured by **Defend / Extend / Upend** and pinned to a BCM capability. Zones: **Likely wins** (hi value + hi feasibility → do now) / **Calculated risks** (hi value, low feasibility → small bets) / **Marginal gains** (low value → don't distract). Rendered by `scripts/render_radar.py`.
-2. **AI Readiness gap chart** — a 7-axis spider, **current vs future**, with a gap table. The point is the **gap**, not the score. Rendered by `scripts/render_readiness.py`.
+Check how the objective and scope were selected before ranking candidates. A detailed product source or feasible demo does not establish company-wide priority. For a broad company question, keep the initial model provisional and test its boundary, alleged gaps and causal claims against actual counterexamples and competing business explanations. Let those findings guide additional research; do not immediately fill all unknowns or refine scores inside an unjustified scope. Preserve conditional alternatives when the evidence cannot choose a priority.
 
-**Format = self-contained HTML + inline SVG (deterministic), NOT a codex raster.** A radar is a scatter at exact (value, feasibility) coordinates and a readiness chart is a spider at exact scores — gpt-image-2 cannot place data points accurately, so a raster would be decorative-but-wrong. This is the same "precise data artifact" lane as the bcm-creator brief HTML, not the illustrative-map lane. (If the user explicitly wants a slide-style raster of these, that's a separate, lossy request — say so.)
+Read [the assessment method](references/assessment-method.md) and [the portfolio contract](references/portfolio-contract.md). Both are included here; no hardcoded sibling installation is required.
 
-## Phase 0 — clarify (the scoring wall)
+## Choose the visual for the question
 
-Most of the input is a **strategic/internal judgement, not web-researchable** (the data wall from [[bcm-creator]]): which use cases the org is weighing, their value/feasibility, the readiness scores. Pin via `AskUserQuestion` (skip what's already given):
+- **Opportunity radar:** Where does the portfolio concentrate effort: front office, back office, products/services or core capabilities, and everyday improvement or a change in competitive position? This is strategic positioning; unlabeled ring distance is not ROI, feasibility or maturity.
+- **Value/feasibility matrix:** How valuable and implementable is a candidate for this organization and objective? A point needs two supported scores and their basis. This is not the opportunity radar.
+- **Readiness gap:** What must change between current conditions and a justified target? Examine strategy, value, organization, people/culture, governance, engineering and data in context. Unknown is not 0 or 1; the target is not automatically 5.
 
-1. **Which BCM / company** — and is there a bcm-creator brief to pull capabilities from?
-2. **Use cases** — does the user supply them (+ rough value/feasibility), or should I **propose candidates** per capability from the BCM + industry-typical AI use cases?
-3. **Who scores** — the user/org gives value/feasibility & readiness, or I put down **estimates marked TBD** for them to adjust? (Never present estimates as the org's real scores.)
+Provide the relevant visuals. The historical filename `render_radar.py` is retained, but its output is explicitly a value/feasibility matrix. Use Mermaid or a labeled categorical diagram for portfolio positioning; do not fabricate numerical coordinates.
 
-## Phase 1 — assemble the portfolio (apply the assessment lenses)
+## Assess options
 
-Build one `portfolio.json`:
-- `use_cases[]`: `{name, capability (a BCM L1 box), value 1-5, feasibility 1-5, type: defend|extend|upend}`. When proposing/sizing each, apply note 1's lenses (documented in `bcm-method-govern.md`):
-  - **value** = contribution to a business objective; **feasibility** = technical maturity + internal readiness.
-  - **Defend / Extend / Upend** tag — augment-with-stable-ROI / process-transformation-with-packaged-solutions / frontier-high-uncertainty.
-  - sanity-check with the **6 agent dimensions** (Perception / Decisioning / Actioning / Agency / Adaptability / Knowledge — most need 2–3) and **agency caution**: a use case demanding end-to-end Level-1 autonomy is a Calculated risk at best (one bad auto-decision propagates), so its feasibility is low. Also note **which techniques + data sources + integration** it needs — thin integration ⇒ lower feasibility.
-- `readiness[]`: the 7 dims `{dim, current 1-5, future 1-5}`. Judge the **gap**; data readiness is contextual (don't require 100% clean).
-- `notes[]`: flag every estimate (`TBD`), the scoring wall, and the type-inference basis. Worked example: `references/example-portfolio.json`.
+Use supplied scores and evidence. Ask for material missing internal judgments, or continue with qualitative findings and `null` scores when only public evidence is available. Provide illustrative scores only when the user asks for estimates, marking each with its basis. Never label a numeric guess “TBD” and plot it as measured.
 
-## Phase 2 — render
+For each candidate, establish:
 
-```bash
-python3 ~/.claude/skills/ai-opportunity-radar/scripts/render_radar.py /path/portfolio.json /path/radar.html
-python3 ~/.claude/skills/ai-opportunity-radar/scripts/render_readiness.py /path/portfolio.json /path/readiness.html
-open /path/radar.html /path/readiness.html
-```
+- Objective and capability ID, the actual bottleneck, and a comparable non-AI/process option when relevant.
+- Expected contribution and evidence that would establish it, with units, period and uncertainty. Avoid double-counting benefits across dependent projects.
+- Data, integration, latency, permissions and operational resources. Show prerequisites explicitly; a supporting data project can precede a higher-scoring application.
+- What the system detects, decides, acts on and confirms, and what people or other systems still do. Separate function from authorization and performance.
+- Responsibility for data defects, operational exceptions, outcome review and changes, distinguishing proposed roles from confirmed owners.
+- A validation step and conditions for advancing, revising or stopping. An upper-right point does not authorize deployment.
 
-Sanity-check: radar dot count = use-case count; readiness axes = 7 (or however many dims given). Both are pure-stdlib (no matplotlib/numpy needed).
+Distinguish six agent dimensions: perception, decision, action, autonomy, adaptation and knowledge. Choose functions for the task; do not assume every use case needs an agent or maximum autonomy.
 
-## Gotchas
+Defend concerns individual-work improvement, Extend team/process change, and Upend a strategic bet on new value or markets. The category does not guarantee ROI, risk, cost or success. A portfolio need not contain all three.
 
-- **Don't present estimated scores as the org's real numbers.** value/feasibility/readiness are internal strategic judgements; pre-fill as `TBD` estimates and say so. A radar full of made-up scores is worse than an empty one.
-- **The radar is a prioritisation aid, not truth** — it sorts the conversation, it doesn't make the decision. Two people can score the same use case differently; that disagreement IS the useful output.
-- **Pin use cases to a capability, not to themselves** — same as the BCM rule; a use case with no capability to pin to is a smell (it's probably an outcome or a tool).
-- **Readiness: gap, not score** — a high current score with no future ambition isn't readiness, it's complacency; a big gap on Strategy/Governance (the oft-ignored dims) is the real blocker.
-- **HTML+SVG, not raster** (see above) — these are data charts; deterministic render is the correct tool, not a faked picture.
-- This skill is the *use* step; making the map itself is [[bcm-creator]], and the connecting method is `~/.claude/skills/bcm-creator/references/bcm-method-govern.md`.
+## Write and render
+
+Before writing or translating Traditional Chinese, read [the native writing and translation rules](references/chinese-writing.md). State company facts and proposed actions in affirmative, concrete sentences. Preserve uncertainty through explicit conditions. Keep research history, abandoned hypotheses, chart construction and missing-score explanations in separate records; explain the actual work and the information needed to decide in the reader-facing page.
+
+Write company-specific investment judgments in connected prose: actual disclosed activity, evidence, proposed improvement and the information needed to decide. Do not use a mandatory Why/Example teaching format or fill missing evidence with generic hypothetical cases. Preserve the seven analytical lenses while letting the company's decision determine the headings. Use capability names in the narrative and keep IDs in the structured data. Supplementary Mermaid diagrams may clarify actual dependencies, responsibilities or authority; use prose rather than tables.
+
+Deliver HTML reading pages. Save `portfolio.json` internally under `records/model/` using the contract; do not create additional Markdown deliverables or Markdown/JSON download links unless explicitly requested. `scripts/render_radar.py` plots supported value/feasibility pairs and retains unscored candidates in the page. `scripts/render_readiness.py` displays separate current/target marks, so missing values do not create a fictitious polygon. When all relevant scores are unknown, the renderers show the work and requirements without an empty chart. Set `language` to `zh-TW` for Chinese labels; optional readiness `title` fields can state concrete conditions. Both render source links and human-readable capability and dependency names while retaining IDs in internal JSON and link anchors.
+
+For the narrative brief and capability map, use `bcm-creator` or the user's existing format. Verify source scope, dependency links, uncertainty, plotted counts, missing-score behavior and actual output. Preserve the raw result when the user requests an independent trial; do not silently polish it before review.

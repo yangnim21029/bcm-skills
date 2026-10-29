@@ -1,52 +1,59 @@
-# BCM Skills — a Business Capability Map toolkit for Claude Code
+# BCM Skills — capability-based investment reasoning
 
-Two [Claude Code](https://claude.com/claude-code) skills that take a company from a blank page to a board-ready **Business Capability Map (BCM)** and the downstream visuals you use to act on it. The method is distilled from a Gartner webinar on BCMs (Alexander Hoeppe) — the core idea: **pin AI investment to durable business capabilities, not to vendor use-cases.**
+Two portable skills for Codex and other Agent Skills hosts. Start with what an organization needs to do, collect related evidence under capability names, then judge which improvements could help a clearly stated outcome.
 
-## The two skills
+`bcm-creator` builds the capability map and a sourced investment brief. `ai-opportunity-radar` assesses options, portfolio concentration and readiness. The method is informed by Alexander Hoeppe's Gartner webinar “Accelerate Your AI Journey With Business Capability Maps”; these skills are independent interpretations, not official Gartner templates.
 
-| Skill | What it does | Outputs |
-|---|---|---|
-| **`bcm-creator`** | *Make the map.* Clarify the brief → research the company → derive capabilities **bottom-up** → apply pace-layer colours + AI pins. | A **BCM-input brief** (HTML — business objectives + a capability metadata table, split value-realizing / value-enabling) **and the BCM itself as a raster image**. |
-| **`ai-opportunity-radar`** | *Use the map.* Score AI use cases and readiness against the BCM. | An **AI Opportunity Radar** (use cases on Value × Feasibility, Defend/Extend/Upend) and a **7-dimension Readiness gap** chart — self-contained HTML + inline SVG. |
+## What the revised method changes
 
-The full method is bundled in `bcm-creator/references/`:
-- `bcm-method-howto.md` — *how to draw* a BCM (9-step walkthrough; the hard step is unit purity: don't put outcomes/processes/use-cases in capability boxes).
-- `bcm-method-govern.md` — *how to use & govern* it (use-case assessment, the 6 agent dimensions, readiness, Capability→Value Stream→Process→IT + Digital Thread, the update cadence). A BCM is an ongoing governance backbone, not a one-off diagram.
+A map organizes knowledge for a decision. Equipment, people, systems and AI proposals link to capabilities; a capability label alone proves neither that the organization has the full capability nor that an investment is worthwhile.
 
-## Install
+New analyses begin with a short, structured conversation about the decision, scope and materials the user can directly provide. Ask in small rounds, reuse existing answers and let the user explicitly skip. The [intake guide](bcm-creator/references/interactive-intake.md) connects questions to the seven decision lenses and records answers, material scope and unresolved gaps. Both skills include the same portable guide; moving between them does not restart the interview. Prose-only edits reuse the established scope.
 
-Claude Code auto-discovers skills in `~/.claude/skills/`. Copy the two folders there:
+Research then begins with a provisional view. Each source reveals a partial perspective; detailed product documentation must not choose the company's investment priority. Seek actual counterexamples to the current boundary, alleged gap or causal claim, then let those findings direct further inquiry and revision. Unknowns can remain open. The final priorities are synthesized from evidence and counterexamples rather than inherited from the initial view. Do not replace this reasoning with an exhaustive information checklist or treat an easy local pilot as the most important business investment.
 
-```bash
-cp -R bcm-creator ai-opportunity-radar ~/.claude/skills/
+An AI investment brief addresses seven questions in the actual analysis: can the work execute, who sustains it, how the decision changes with the objective, what to maintain/monitor/innovate, which data makes the task possible, which part really needs improvement, and how human veto/notification should work. These questions shape company-specific investment judgments in connected prose. They do not impose a Why/Example teaching format or generic hypothetical scenarios. Use no tables by default.
+
+Both skills include Traditional Chinese writing and translation rules. The reading page states company facts, proposed actions, mechanisms and validation conditions in clear affirmative sentences. Counterexamples shape the conclusions; research history and production details remain in separate records. The writing rules preserve uncertainty while replacing abstract terms and English sentence patterns with concrete, natural Chinese.
+
+Colors express attention under a selected objective. They do not prescribe budget percentages, equate differentiation with buying AI or exempt commodity capabilities from maintenance. A capability base map, a workflow, an opportunity radar, a value/feasibility matrix and a readiness assessment answer different questions.
+
+Unknown internal information remains unknown. Public disclosures, analyst inferences and proposed goals/roles stay distinguishable. Scores are optional; renderers retain unscored options instead of fabricating coordinates.
+
+## Local use
+
+For Codex, copy or symlink both skill directories into a project `.agents/skills/` or your `~/.agents/skills/`. Codex supports local skill directories and symlinks; see the [official skill documentation](https://learn.chatgpt.com/docs/build-skills). For Claude Code, the same directories can be installed under its configured skill location.
+
+```sh
+mkdir -p .agents/skills
+cp -R /path/to/bcm-skills/bcm-creator .agents/skills/
+cp -R /path/to/bcm-skills/ai-opportunity-radar .agents/skills/
 ```
 
-Then in Claude Code just ask in natural language — the skills trigger on intent:
-- "make a BCM for `<company>`" → `bcm-creator`
-- "build the AI opportunity radar / readiness for it" → `ai-opportunity-radar`
+Example requests:
 
-## Dependencies (all optional — the skills degrade gracefully)
+- “Use $bcm-creator to map this company and assess where AI could improve the selected business outcome.”
+- “Use $ai-opportunity-radar to compare these options; keep unsupported readiness and value scores unknown.”
 
-- **`python3`** (stdlib only) — required for the HTML renderers. No matplotlib/numpy needed.
-- **OpenAI Codex CLI** (`$imagegen`, gpt-image-2) — for the BCM raster image. **Without it, `bcm-creator` writes a ready-to-paste ChatGPT/DALL·E image prompt instead.**
-- Sibling skills the SKILL.md files link with `[[...]]` (`codex-image-gen`, `polish-doc`, `search-cross`, `browser-use`, `gemini-image-gen`) are conveniences, not hard requirements: research falls back to plain web search, and you can skip the prose-polish pass. Those links will be dangling if you don't have those skills — harmless.
+No private transcript, special sibling writing skill or external subagent is required. An image-generation tool is needed for the primary capability-map PNG. Research real organizations with current primary sources; supplied evidence can support an offline analysis. An independent test should receive the skill, task and necessary raw inputs, without the author's answer or conversation history.
 
-## Design principles baked in (the non-obvious ones)
+## Outputs and tools
 
-- **Bottom-up, not top-down.** List the real concrete capabilities first, then aggregate into domains/tiers — don't force-fit a 13-category taxonomy (that's ideation, not derivation).
-- **Analyst-grade data, not PR.** Pull operational reality (cost structure, unit economics, throughput) from industry/business-analysis sources, not revenue/market-share headlines; tag each figure's grade; leave genuinely-internal fields (`owner`/systems/KPI/readiness) marked TBD (to be filled internally).
-- **The HTML is the stable base map; the image is the overlay.** pace-layer colour and AI pins are strategic overlays that live on the *image*, not in the capability list. The image is a real raster (codex), never an HTML screenshot.
-- **The hard part is unit purity, not layout.** A pretty map full of outcomes and processes is a wrong map.
-- **Fresh/trending lane for fast-moving targets.** A recency pass keeps the *overlays* (objectives, AI pins, pace) current — never the stable capability list. One news cycle ≠ a capability change.
+The v3 BCM contract delivers an HTML reading page with its generated capability-map image. Structured models stay under internal `records/model/`; additional Markdown or JSON downloads are created only when explicitly requested. Capabilities have stable IDs; objective-specific overlays remain separate. The [image workflow](bcm-creator/references/capability-map-visuals.md) bundles the user's visual reference, a shared layout and typography specification, and a helper that prepares exact labels and colors. Adapt the actual reference image, inspect the saved result and correct local defects without replacing the whole design. Set `map_image` to its relative path. Mermaid is reserved for useful supplementary diagrams.
 
-## Examples
+```sh
+python3 bcm-creator/scripts/prepare_map_image.py bcm.json --output-dir records/map
+python3 bcm-creator/scripts/render_bcm_input_html.py bcm.json bcm.html --mermaid-js /path/mermaid.min.js
+python3 ai-opportunity-radar/scripts/render_radar.py portfolio.json matrix.html
+python3 ai-opportunity-radar/scripts/render_readiness.py portfolio.json readiness.html
+```
 
-Worked example specs ship in each skill's `references/` (`example-bcm-input.json`, `example-bcm.json`, `example-portfolio.json`) — run the renderers on them to see the output formats.
+Python renderers use the standard library. The BCM page embeds a local Mermaid bundle when supplied; otherwise it discloses and uses a CDN. The portfolio pages use inline SVG and work offline. The historical filename `render_radar.py` now explicitly labels its output a value/feasibility matrix; strategic opportunity positioning is a separate categorical diagram.
 
-The finished raster for the TSMC example (gpt-image-2 from `example-bcm.json`; labels in Traditional Chinese — the skill renders whatever language the spec uses):
+Small fictional specs in `references/` illustrate the contracts. They replace the previous TSMC answer examples so a TSMC trial need not reuse a completed answer. The schema fixtures require their image to be generated before a CLI render. Existing v2 BCM specs need a generated image and company-analysis paragraphs in place of the Why/Example fields; seven-lens coverage remains, without a mandatory chapter count.
 
-![TSMC example BCM — pace-layer colours, AI pins, dashed value-enabling tiles](bcm-creator/references/example-bcm.png)
+## Validation and provenance
 
-## Credit & licensing
+Run `python3 -m unittest discover -s tests` to check meaningful rendering behavior: missing scores remain missing, invalid ranges and dependencies fail, input text is escaped, and outputs preserve the requested structure. Inspect actual diagrams and source support as well; structural validation does not prove the investment judgment.
 
-Method distilled from the Gartner webinar *"Accelerate Your AI Journey With Business Capability Maps"* (Alexander Hoeppe, VP Analyst). Reference capability templates (APQC PCF, etc.) are **not** included — obtain your own per their licences. The skills, scripts, and method write-ups here are original work; add a LICENSE of your choice before redistributing.
+The references distinguish source claims from interpretation, including the webinar's source-specific autonomy numbering. The instructions are original adaptations; the visual reference was supplied by the user and guides composition only. No new license is implied by this revision.

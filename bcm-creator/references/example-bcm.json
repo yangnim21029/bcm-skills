@@ -1,45 +1,68 @@
 {
-  "_note": "Illustrative BCM JSON structure (a fictional digital bank) showing the shape the IMAGE brief consumes — the BCM is a picture, not HTML. tiers/domains are the BOTTOM-UP aggregation of concrete capabilities, not a pre-drawn top taxonomy. Standalone example; the BCM-input brief example (example-bcm-input.json) is a different company (TSMC).",
-  "title": "Xinda Digital Bank Business Capability Map",
-  "subtitle": "Digital-only bank · pace-layer strategic positioning (AI differentiation perspective, illustrative)",
-  "perspective": "Xinda Digital Bank itself, pushing AI differentiation",
-  "tiers": [
-    {"name": "Strategic tier", "domains": [
-      {"name": "Governance", "capabilities": [
-        {"label": "Strategy management", "pace": "keep_up"},
-        {"label": "Regulatory compliance", "pace": "keep_up"},
-        {"label": "Risk management", "pace": "keep_up"}
-      ]}
-    ]},
-    {"name": "Core tier", "domains": [
-      {"name": "Funding and credit", "capabilities": [
-        {"label": "Credit underwriting", "pace": "differentiating", "ai": true, "l2": ["Credit scoring", "Limit approval"]},
-        {"label": "Limit management", "pace": "keep_up"},
-        {"label": "Collections management", "pace": "keep_up"}
-      ]},
-      {"name": "Deposits and payments", "capabilities": [
-        {"label": "Deposit management", "pace": "commodity"},
-        {"label": "Payment clearing", "pace": "keep_up"},
-        {"label": "Cross-border remittance", "pace": "keep_up"}
-      ]},
-      {"name": "Wealth and channels", "capabilities": [
-        {"label": "Wealth advisory", "pace": "differentiating", "ai": true},
-        {"label": "Digital channels", "pace": "differentiating", "ai": true},
-        {"label": "Customer relationships", "pace": "keep_up"}
-      ]}
-    ]},
-    {"name": "Supporting tier", "domains": [
-      {"name": "Risk and compliance", "capabilities": [
-        {"label": "KYC", "pace": "keep_up"},
-        {"label": "Anti-money laundering AML", "pace": "keep_up"},
-        {"label": "Fraud detection", "pace": "differentiating", "ai": true}
-      ]},
-      {"name": "Data and operations", "capabilities": [
-        {"label": "Core systems", "pace": "commodity"},
-        {"label": "Data governance", "pace": "commodity", "enabling": true},
-        {"label": "Information security", "pace": "keep_up"},
-        {"label": "Talent management", "pace": "commodity"}
-      ]}
-    ]}
-  ]
+  "schema_version": 3,
+  "mode": "map",
+  "company": "Illustrative repair service",
+  "as_of": "Illustrative, not a current company assessment",
+  "language": "en",
+  "viewpoint": "Service operator",
+  "decision_context": "Explore fewer repeat visits; analyst-proposed example.",
+  "context": "Fictional schema example, not a full investment brief.",
+  "objectives": [
+    {
+      "id": "O1",
+      "name": "Reduce repeat visits",
+      "kpi": "Repeat visits per completed repair; baseline and target unknown.",
+      "status": "analyst-proposed",
+      "evidence": [
+        "S1"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "C1",
+      "name": "Repair equipment",
+      "level": "L1",
+      "domain": "Service delivery",
+      "role": "realizing",
+      "definition": "Diagnose and repair customer equipment within the agreed service scope.",
+      "status": "hypothetical",
+      "kpi": "Repeat-visit rate",
+      "owner": "Proposed service manager; not a real assignment.",
+      "evidence": [
+        "S1"
+      ]
+    },
+    {
+      "id": "C2",
+      "name": "Manage repair records",
+      "level": "L1",
+      "domain": "Service information",
+      "role": "enabling",
+      "definition": "Maintain traceable device, fault, repair and outcome records.",
+      "status": "hypothetical",
+      "data_inputs": "Device IDs and repair results; availability unverified.",
+      "evidence": [
+        "S1"
+      ]
+    }
+  ],
+  "overlays": [],
+  "analysis": [],
+  "recommendations": [],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Fictional scenario authored for this schema example",
+      "url": "",
+      "date": "undated",
+      "kind": "hypothetical"
+    }
+  ],
+  "notes": [
+    "Missing owner or data fields remain unknown; no implied maturity score."
+  ],
+  "map_image": "generated-capability-map.png",
+  "map_alt": "Fictional repair-company capability map",
+  "map_caption": "Schema fixture: generate and inspect an image matching these capabilities before rendering; no company facts are supplied by this example."
 }

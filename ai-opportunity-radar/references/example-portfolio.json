@@ -1,29 +1,98 @@
 {
-  "company": "TSMC",
-  "as_of": "2026-06 (illustrative)",
+  "schema_version": 2,
+  "company": "Illustrative repair service",
+  "as_of": "Illustrative",
+  "objective": "Reduce repeat visits",
+  "score_scale": "Illustrative 1–5 discussion scale, not measured company scores.",
   "use_cases": [
-    {"name": "AI defect detection / yield prediction", "capability": "Yield management", "value": 5, "feasibility": 4, "type": "extend"},
-    {"name": "Predictive equipment maintenance", "capability": "Facilities and equipment engineering", "value": 4, "feasibility": 4, "type": "defend"},
-    {"name": "AI capacity and scheduling optimization", "capability": "Capacity planning and allocation", "value": 4, "feasibility": 4, "type": "extend"},
-    {"name": "AI supply-chain demand forecasting", "capability": "Supply chain management", "value": 3, "feasibility": 4, "type": "defend"},
-    {"name": "GenAI engineering knowledge assistant", "capability": "Talent management", "value": 3, "feasibility": 5, "type": "defend"},
-    {"name": "AI-assisted process/PPA exploration (DTCO)", "capability": "Process technology R&D", "value": 5, "feasibility": 3, "type": "upend"},
-    {"name": "AI packaging and thermal simulation", "capability": "Advanced packaging", "value": 4, "feasibility": 3, "type": "extend"},
-    {"name": "AI customer service / IR assistant", "capability": "— (back office)", "value": 2, "feasibility": 5, "type": "defend"},
-    {"name": "Fully autonomous lights-out decisioning", "capability": "Wafer fabrication", "value": 5, "feasibility": 1, "type": "upend"}
+    {
+      "id": "U1",
+      "name": "Find relevant repair history",
+      "capability_id": "C1",
+      "capability": "Repair equipment",
+      "type": "defend",
+      "value": 3,
+      "feasibility": 4,
+      "score_status": "estimated",
+      "basis": "Fictional illustration with explicit example-only estimates.",
+      "dependencies": [],
+      "validation": "Check search usefulness on a small reviewed sample."
+    },
+    {
+      "id": "U2",
+      "name": "Suggest replacement parts",
+      "capability_id": "C1",
+      "capability": "Repair equipment",
+      "type": "extend",
+      "value": null,
+      "feasibility": null,
+      "score_status": "unknown",
+      "basis": "No linked fault, part and repair-outcome evidence supplied.",
+      "dependencies": [
+        "U1"
+      ],
+      "validation": "Confirm historical linkage before scoring."
+    }
   ],
   "readiness": [
-    {"dim": "Strategy", "current": 4, "future": 5},
-    {"dim": "Value", "current": 3, "future": 5},
-    {"dim": "Organization", "current": 4, "future": 4},
-    {"dim": "People & Culture", "current": 3, "future": 5},
-    {"dim": "Governance", "current": 4, "future": 5},
-    {"dim": "AI Engineering", "current": 4, "future": 5},
-    {"dim": "AI Data", "current": 3, "future": 5}
+    {
+      "dim": "Strategy",
+      "current": 2,
+      "future": 3,
+      "score_status": "estimated",
+      "basis": "Fictional illustration.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    },
+    {
+      "dim": "Value",
+      "current": null,
+      "future": null,
+      "score_status": "unknown",
+      "basis": "No assessment supplied.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    },
+    {
+      "dim": "Organization",
+      "current": null,
+      "future": null,
+      "score_status": "unknown",
+      "basis": "No assessment supplied.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    },
+    {
+      "dim": "People and culture",
+      "current": null,
+      "future": null,
+      "score_status": "unknown",
+      "basis": "No assessment supplied.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    },
+    {
+      "dim": "Governance",
+      "current": null,
+      "future": null,
+      "score_status": "unknown",
+      "basis": "No assessment supplied.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    },
+    {
+      "dim": "Engineering",
+      "current": null,
+      "future": null,
+      "score_status": "unknown",
+      "basis": "No assessment supplied.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    },
+    {
+      "dim": "Data",
+      "current": null,
+      "future": null,
+      "score_status": "unknown",
+      "basis": "No assessment supplied.",
+      "next_action": "Confirm conditions and target with the accountable role."
+    }
   ],
   "notes": [
-    "The use cases' value/feasibility and readiness scores are illustrative estimates (an external view), not TSMC's internal scoring — real scoring must be done by the organization itself.",
-    "Type (Defend/Extend/Upend) is inferred from public strategy; \"fully autonomous lights-out\" lands in calculated risk, echoing note 1: Level 1 full autonomy is science fiction end-to-end, and one bad automated decision propagates.",
-    "Readiness reads the gap, not the score: Value / People & Culture / AI Data have the biggest gap at +2 — the work most worth doing."
+    "Every numeric value in this file is fictional and illustrative."
   ]
 }

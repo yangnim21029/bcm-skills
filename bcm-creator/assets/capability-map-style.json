@@ -1,0 +1,57 @@
+{
+  "version": 4,
+  "reference": "capability-map-reference.png",
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "background": "#FFFFFF",
+    "outer_margin": 32,
+    "aspect_ratio": "16:9"
+  },
+  "layout": {
+    "header_height": 125,
+    "footer_height": 28,
+    "region_gap": 28,
+    "domain_gap": 14,
+    "cell_gap": 7,
+    "cell_height": 46,
+    "realizing_width_fraction": 0.65,
+    "realizing_domains": "compact panels in a readable grid; capabilities in one vertical list per domain",
+    "enabling_domains": "compact panels stacked vertically; capabilities in one vertical list per domain",
+    "domain_heading": "small centered text on a near-white strip; no large dark header",
+    "region_frame": "none; only individual domain panels have borders",
+    "sparse_models": "keep the 16:9 canvas, compact cells and balanced whitespace; never inflate cells or add capabilities",
+    "cell_flow": "one capability per full-width row, stacked top to bottom in every domain on both sides; text stays horizontal"
+  },
+  "type": {
+    "family": "Noto Sans TC or equivalent clear sans serif",
+    "title_px": 34,
+    "region_px": 20,
+    "domain_px": 19,
+    "cell_px": 20,
+    "legend_px": 17
+  },
+  "palette": {
+    "ink": "#17324D",
+    "border": "#9BB9C2",
+    "panel": "#F5F9FA",
+    "domain_header": "#F5F9FA",
+    "title_accent": "#D86224",
+    "unassessed": "#FFFFFF",
+    "commodity": "#FFFFFF",
+    "keep_up": "#C9EDF5",
+    "differentiating": "#087FAD",
+    "unknown": "#E8ECEF"
+  },
+  "constraints": [
+    "compact architecture-map composition matching the supplied reference",
+    "one independently bordered rectangle per capability",
+    "thin pale blue-grey straight borders",
+    "no outer frame around an entire region",
+    "no large dashboard cards or oversized region headings",
+    "no rounded cards, shadows, gradients, texture, icons or arrows",
+    "no capability IDs inside cells",
+    "uniform label size across domains; do not stretch sparse cells",
+    "no inherited company labels or source branding"
+  ]
+}

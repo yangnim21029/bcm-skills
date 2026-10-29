@@ -1,110 +1,65 @@
-# How to Draw a BCM — Walked Through With an Appliance Maker
+# Organize knowledge by business capability
 
-> The method comes from note 1 (the source Gartner BCM webinar, by Alexander Hoeppe). The worked example is a fictional own-brand appliance manufacturer, "Dingdian" (designs in-house, outsources production, sells under its own brand). Each step draws one real frame and puts the wrong version right next to the correct one.
-> Throughout, keep on the four "reading lenses" from note 1's glossary: **perspective, relative altitude, base map vs overlay, and unit purity.** That last one is the heart of this doc — it's where most people (including my own first draft) come undone.
+Source basis: Alexander Hoeppe, Gartner, “Accelerate Your AI Journey With Business Capability Maps,” 01:01:26. This is an interpretation of the webinar, not an official template. Hypothetical extensions are identified; no private transcript is required to use the method.
 
----
+## Establish the decision and viewpoint
 
-## Step 0: First decide which map you're drawing
+An enterprise, supplier or business unit has a different boundary. Preserve a boundary or goal the user actually supplied. For a company-only request, sketch its major businesses, customers, value relationships and shared work as a provisional model. Do not make the best-documented product line stand for the whole company. Unknown areas may remain unknown; the sketch does not need an exhaustive taxonomy before reasoning can begin.
 
-Dingdian's IT lead hands you two things: a "procurement process diagram" with 14 boxes (requisition → approval → quote request → bid comparison → order → goods receipt → reconciliation → payment), and a "procurement capability" that is a single box: **Procurement Management.**
+Public sources can establish products, activities and disclosed results, but usually not the entire internal workflow, ownership, implementation cost or readiness. Preserve that distinction while making useful conditional recommendations.
 
-A BCM wants the latter. The test, in one line: **will "requisition → approval → quote request" change next year?** Yes — bring in AI for quote requests and the bid-comparison step disappears. But "does Dingdian need to procure?" doesn't change in ten years. **The process changes; the capability doesn't,** and a BCM draws the layer that doesn't change.
+## Keep distance from each source
 
-## Step 1: Pin down "whose map is this"
+Before external research for a new analysis, complete or explicitly skip the [structured intake](interactive-intake.md). User-provided boundaries define the requested decision; user-reported facts and supplied documents still need scope-aware interpretation. Reuse known answers, and keep unresolved internal conditions visible rather than allowing search results to supply assumed intent.
 
-Before you draw a line, answer one question: **whose** capability map is this? The answer is Dingdian's own. Why pin it first? Because the same box changes identity depending on where you stand — `Contract Manufacturing` seen from Dingdian is "a capability we outsource," but seen from the contract factory it's "its core capability." **Leave the perspective undefined and the boxes drift:** one moment you want to draw the contract factory's internals in, the next you don't. Pin "Dingdian's own perspective" and the answers to which boxes to include and how detailed they should be become fixed.
+Ask what a source can show and why it was produced. A product page establishes advertised functions; a filing describes a reporting boundary and period; a recruitment page describes the organization to prospective employees; support documentation describes a particular workflow. None independently establishes the company's most valuable investment opportunity. A customer's account can expose a different experience but may cover only one deployment.
 
-## Step 2: Open an APQC PCF as your menu — don't draw from scratch
+Record material claims with their scope, date, denominator and origin. Distinguish observed activity, a source's causal interpretation, the analyst's inference and an unanswered question. Several pages repeating one corporate announcement remain one originating claim. Official status, detail and repetition do not remove perspective or turn a proposed benefit into a measured result.
 
-Open an APQC PCF (cross-industry version). Its 13 top-level categories spread across the first page. Dingdian orders from it like this:
-- **Keep**: 2.0 Develop Products (the lifeline), 3.0 Marketing & Sales, 4.0 Supply Chain (life or death for a contract-manufacturing model), 6.0 Customer Service, 7.0–13.0 all the support categories.
-- **Rename**: 2.0 "Develop Products" becomes what Dingdian actually calls it — "Product Development."
-- **Cut**: 5.0 "Deliver Services" — Dingdian has no service delivery, so delete it.
-- **Add**: "After-Sales & Warranty Service Management," which APQC doesn't have — it's specific to appliances, so add it yourself.
+Use perspectives that can discriminate between competing explanations. Do not impose a source quota, mechanically balance credible evidence with weak objections, or infer that a poorly documented capability is absent or unimportant. Keep conflicting observations visible until their scope or evidence resolves them.
 
-Draw from scratch and you'll always miss something; delete and tweak from a template and your coverage is far higher. **The template also clears the next step's three purity tests for you** — every APQC line is already vetted, same-level, clean capability.
+## Revise the model through counterexamples
 
-## Step 3: Run every box through the 3 purity tests (the key: this is where dirt sneaks in)
+Build understanding by revising provisional claims, not by immediately completing every missing box. State a material claim clearly enough that evidence could challenge it: the business boundary, what capability is missing, which condition causes a loss, or why a goal deserves priority.
 
-To decide whether a box is a **clean capability**, run it through three tests. My first-draft Dingdian failed all three — which makes it the clearest possible counter-example:
+Look for actual company evidence that could make that claim fail. A business activity outside the proposed map can challenge completeness. A shared capability can challenge a business-unit boundary. An existing product function can refute a claimed functional gap. An improvement that does not change the relevant outcome can challenge the causal link. A material opportunity elsewhere can challenge a local priority. These are inquiry directions, not fictional examples to insert in a company report.
 
-| What I wrongly put in (first draft) | Which test it fails | Renamed to a clean capability |
-|---|---|---|
-| `Retention` | It's an **outcome**, not a capability | **Engagement & Retention Management** |
-| `Travel Expense Reimbursement` | It's a **process** (a transaction flow), not a capability | **Expense Management** |
-| `Predictive Maintenance` | It's a **use case**, not a capability | **Equipment Maintenance Management** |
-| `Recruiting` (just a bare verb) | Leans toward **how / action** | **Talent Acquisition** |
+Let the counterexample determine what to examine next. Narrow or replace the claim, redraw a boundary, split a capability, reconsider the metric or retain two competing explanations. Gather the additional evidence needed to distinguish them; leave unrelated gaps open. Do not respond to conflicting evidence by merely adding another paragraph while retaining the same conclusion.
 
-The three tests in plain language:
-1. **What, not how**: state "what it does," not "what it uses to do it." `Expense Management` is a capability; `Travel Expense Reimbursement` is a process beneath it.
-2. **Capability, not outcome**: `Engagement & Retention Management` is something you do; `Retention` is the result you get when you do it right. Make the outcome a box and you'll later pin AI on the outcome instead of on the capability that produces it (you'll hit this in Step 7).
-3. **Same level, no mixed types**: a sibling set of sub-boxes must be the same type and the same altitude — don't mix capability, process, outcome, and use case in one row.
+A possible falsifier is not yet an observed counterexample. A counterexample can invalidate an overbroad claim without proving the opposite or identifying a better investment. Absence of a found counterexample is not confirmation. Preserve uncertainty where the available fragments cannot settle the question.
 
-**Why this test is the hardest**: on the surface, `Retention`, `Travel Expense Reimbursement`, and `Predictive Maintenance` are all "business nouns" and all look like capabilities. **Being a business noun ≠ being a clean capability.** Judging which kind each box is takes human judgment; the template (APQC) clears about eighty percent for you, and inventing box names yourself is where you're most likely to slip.
+Move to a focused assessment when the chosen boundary and objective have a defensible basis against the material alternatives considered. Distinguish ease of research, feasibility of a small pilot and importance to the business. If only a local demonstration is justified, state its scope. Write the final company facts, business implications and conditional recommendation in the main context. Keep the sequence of hypotheses, searches and revisions in a separate research record; the method should improve the answer without becoming the subject of the answer.
 
-## Step 4: One owner — this is where the argument happens
+## Use capability names as a shared index
 
-Draw `Customer Data Management` and the marketing director says "that's mine, I own the CRM," while the customer-service director says "the complaint data lives with me." Both want it → this is the BCM's most painful and most valuable moment: **it forces a decision nobody wants to make — who actually owns this capability.** Don't settle it now and the later AI investment (who pays to build the customer 360 view) becomes a game of hot potato. One owner, non-overlapping boundaries — that's the fourth, real-world test on top of the three purity tests.
+A capability describes work the business must perform even when tools, departments or processes change. Grouping the named company's evidence under that capability lets decision-makers compare improvements to the work rather than equipment names alone. Establish the actual source of loss from company evidence before preferring a prediction model, a process change or additional resources.
 
-## Step 5: Decompose further only when "one box carries multiple objectives"
+Keep the equipment records. One machine can support production, quality and maintenance; link it to each relevant capability rather than forcing it into an exclusive folder.
 
-Dingdian's Level 1 has about 12 boxes, and at that point you can already take it to the board. **The only signal that you should decompose to Level 2: a single box drives several business objectives at once.**
+## Distinguish the information types
 
-Example: `Talent Management` carries three things at once — production yield (retaining the master technicians), new-product speed (competing for R&D talent), and headcount cost (cutting turnover). One box, three objectives, and you can't tell where to push → decompose to L2: **Talent Acquisition / Learning & Development / Engagement & Retention Management / Compensation Management.** Only after decomposing can you see that "retain the master technicians" maps to `Engagement & Retention Management`, not `Talent Acquisition`. Stop at L2–3; go any deeper and it turns into process.
+An outcome is what should change, such as fewer late deliveries. A capability is work the enterprise must perform, such as production scheduling. A process describes execution steps. People, systems and equipment are resources; an AI use case proposes a change in how some work is performed.
 
-## Step 6: One page, and mark the "value-enabling" boxes
+A noun or verb alone does not determine the category. “Recruiting” can name a capability when its stable scope is clear; a sequence of recruitment steps is a process. Test meaning and scope rather than enforcing a vocabulary trick.
 
-Boxes play two roles, and your drawing has to tell them apart:
-- **Makes money directly (value-realizing)**: `Equipment Maintenance Management` — keeping the line from going down saves money directly, and the boss gets it at a glance.
-- **Value-enabling (the foundation, don't cut)**: `Data Governance` — it makes no money on its own, but without it the equipment-maintenance AI model has no clean data to feed on.
+Identify concrete capabilities, then group them into useful domains. Accessible industry models can provide a starting point or completeness check, but evaluate every item. APQC is a process classification framework, not certification that every entry is a capability at the intended level. Do not invent coverage percentages or claim to consult unavailable proprietary templates.
 
-Every budget season, `Data Governance` loses to the boxes with visible ROI. **Cut it, and six months later the maintenance model drifts off because the data is dirty.** So mark the enabling boxes right on the map, and shield them when you prioritize: these few can't be cut — they hold up the foundation for everyone else.
+## Separate the base map and its assessments
 
-## Step 7: Apply the pace-layer 3 colours + pin AI on capabilities
+Assign stable IDs, definitions, levels and boundaries. Link assessments to an objective, evidence date and scope. A changed objective can alter priorities and measures without creating a new enterprise taxonomy.
 
-By now the boxes are all correct, but it's still a "plain map." Add the final layer — paint each box one strategic colour. **Remember: the colours and the AI pins are an overlay, not an innate property of the box** (the base-map-vs-overlay lens); change the business objective and the same box changes colour.
+Value-realizing and value-enabling describe roles in producing the selected outcome. Enabling work supplies necessary conditions, but its cost and scope still need evaluation. It does not mean “never creates value” or “can never be cut.”
 
-Dingdian (taking the "push new products" perspective):
-- **Deep orange (differentiating, heavy AI bet ~70%)**: `Product Development`, `Industrial Design`, `Demand Forecasting`, `Engagement & Retention Management`, `Equipment Maintenance Management`.
-- **Mid yellow (keep up)**: `Quality Management`, `Supply Chain Management`, `Financial Accounting`.
-- **Off-white (commodity, buy off the shelf)**: `Compensation Management`, `Expense Management`.
+Commodity, Keep-up and Differentiating describe attention under a strategic assessment: maintain reliable operation, monitor/correct gaps, or test improvements that may create a difference. They are not maturity levels, fixed budget allocations or proof that AI is appropriate.
 
-Pin the AI use cases on — **pin them on the capability, not on the outcome or the process** (this is the payoff from Step 3):
-- AI attrition prediction → pin on **`Engagement & Retention Management`** (not on the "retention" outcome).
-- AI equipment-anomaly detection → pin on **`Equipment Maintenance Management`** (not on the "predictive maintenance" use case).
-- AI invoice recognition → pin on **`Expense Management`** (off-white = commodity, buy it, don't build it).
+## Decompose where it helps a decision
 
-Once painted and pinned, how to split the AI budget is obvious at a glance: deep orange takes the lion's share, off-white gets not a cent — buy it off the shelf. **This is the step that turns the BCM from an "org chart" into an "investment map."**
+Expand an upper-level capability when it hides different outcomes, causes, responsibilities, evidence or improvement needs. L2/L3 is often useful, but neither a fixed level nor a fixed child count proves adequacy.
 
-## Step 8: Schedule a six-month review
+The webinar's example of 50 L1 capabilities, each with six to eight L2 items, implies 300–400 L2 items and 50 additional models to maintain. This illustrates modeling cost, not a required taxonomy. Stop when detail adds no decision value; use a process model for execution order.
 
-A BCM is not a document you draw once and file away. **Put it on the calendar and revisit it every six months**: which box changed colour (last year Quality Management was keep up; this year every competitor has gone AI, so it's promoted to differentiating)? Which AI project went from a "bet" to a "sure thing"? AI keeps changing, and a frozen BCM won't survive a year.
+## Connect to action
 
----
+A capability map has no inherent execution sequence. A value stream shows how capabilities contribute to an outcome; process and system views reveal handoffs and data movement. A digital thread connects these views without making data and business governance literally identical.
 
-## Condensed to one line
-
-Pin the perspective → open an APQC PCF to grab the skeleton → **run every box through the 3 purity tests (don't let outcome / process / use case in)** → settle the owner → decompose to L2 only for multi-objective boxes → mark the value-enabling boxes → apply the 3 colours + pin AI on capabilities → review in six months.
-
-**The hardest part is not the layout and not the colouring — it's Step 3, unit purity** — confirming that every box is a true capability, at the same level. Fail this test and everything after is built on sand: you'll bet AI on an outcome like `Retention` instead of on the `Engagement & Retention Management` that produces it. That's exactly how my first draft went wrong.
-
----
-
-## Try another company: Xinda Digital Bank (the second example)
-
-> Why do a second company: Dingdian is manufacturing — it sells appliances you can see. Pick a company as far from it as possible and you find out whether these 9 steps are manufacturing-only or genuinely general. Xinda Digital Bank, a fictional digital bank, is far enough away — it sells financial services, has no physical branches, and is heavily regulated.
-
-**About Xinda Digital Bank**: a fictional branchless internet-only bank where everything runs in the app, serving individual depositors plus micro and small businesses. It wants to use AI to pull ahead on three things — approve credit faster and more accurately, make wealth advisory affordable for everyone, and block fraud in real time.
-
-Move the same 9 steps onto a bank, and here's what changes and what doesn't:
-
-- **The entire core tier gets swapped out** (Step 2, ordering from the APQC menu): Dingdian's core is "Product Development / Supply Chain"; the bank's becomes "Funding & Credit / Deposits, Transfers & Payments / Wealth & Channels." The skeleton holds — the money-making capabilities sit in the middle — but the contents are entirely different.
-- **A whole new block appears: "Risk & Compliance"**: KYC, anti-money-laundering (AML), fraud detection. Manufacturing doesn't have this; the bank does, forced out by the regulator. Without this block the bank can't open its doors.
-- **Same-named capability, flipped strategic standing** (Step 7's colouring, echoing the base-map-vs-overlay lens): Dingdian can paint "Compensation Management" off-white and buy it. The bank's "Regulatory Compliance" can never be painted off-white — regulation is the lifeline, so at minimum keep up. Change the industry, and what colour a given box should be changes with it.
-- **AI still pins on the capability, not the outcome** (Step 3's payoff): pin AI on the four capability boxes `Credit Underwriting`, `Wealth Advisory`, `Digital Channels`, and `Fraud Detection` (deep orange, heavy bet), not on an outcome like "lower bad-debt ratio."
-- **The value-enabling boxes still get marked** (Step 6): draw `Data Governance` as a dashed box — it makes no money on its own, but the AI models for both underwriting and fraud detection rely on it to feed clean data, so shield it from cuts at budget time.
-
-Not one of the 9 steps was dropped and the order didn't change, yet you can still draw a bank's BCM. All that changes is "which items you order off the menu and what colours you paint" — the method itself holds up, and that's the proof that it isn't manufacturing-only.
-
-> The generated example image: a gpt-image-2 raster render — crisp Traditional Chinese, with all four AI badges in place.
+Record known owners, systems, inputs/outputs and evidence. For an unknown, say what must be confirmed and by whom; proposed responsibilities are useful if labeled. Continue into the seven lenses for investment planning.
