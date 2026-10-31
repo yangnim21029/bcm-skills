@@ -5,7 +5,7 @@ Usage: render_readiness.py portfolio.json [readiness.html]
 import json
 import sys
 from pathlib import Path
-from report_utils import esc,page,validate,tr,dimension,score_status
+from report_utils import esc,page,validate,tr,dimension,score_status,inline,paragraphs
 
 
 def chart(rows,spec=None):
@@ -41,7 +41,7 @@ def render(spec):
         if f is not None:scores.append(f'{tr(spec,"Target","目標")}: {f}')
         if c is not None and f is not None:scores.append(f'{tr(spec,"Gap","差距")}: {f-c:+g}')
         if scores:parts.append(f'<p class="meta">{esc(" · ".join(scores))} · {esc(score_status(spec,d.get("score_status","unknown")))}</p>')
-        parts.append(f'<p>{esc(d.get("basis",""))}</p><p>{esc(d.get("next_action",""))}</p></article>')
+        parts.append(paragraphs(d.get('basis',''),spec)+paragraphs(d.get('next_action',''),spec)+'</article>')
     return page(spec,tr(spec,'Readiness requirements','讓方案持續運作的條件'),''.join(parts))
 
 

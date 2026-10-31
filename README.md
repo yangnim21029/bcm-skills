@@ -14,7 +14,7 @@ Research then begins with a provisional view. Each source reveals a partial pers
 
 An AI investment brief addresses seven questions in the actual analysis: can the work execute, who sustains it, how the decision changes with the objective, what to maintain/monitor/innovate, which data makes the task possible, which part really needs improvement, and how human veto/notification should work. These questions shape company-specific investment judgments in connected prose. They do not impose a Why/Example teaching format or generic hypothetical scenarios. Use no tables by default.
 
-Both skills include Traditional Chinese writing and translation rules. The reading page states company facts, proposed actions, mechanisms and validation conditions in clear affirmative sentences. Counterexamples shape the conclusions; research history and production details remain in separate records. The writing rules preserve uncertainty while replacing abstract terms and English sentence patterns with concrete, natural Chinese.
+Both skills write directly in English by default, including report text, capability-map labels and supplementary diagrams. Translation prompts and a bilingual pass are not part of the workflow; another output language requires an explicit request. The reading page states company facts, proposed actions, mechanisms and validation conditions in clear affirmative sentences. Counterexamples shape the conclusions; research history and production details remain in separate records.
 
 Colors express attention under a selected objective. They do not prescribe budget percentages, equate differentiation with buying AI or exempt commodity capabilities from maintenance. A capability base map, a workflow, an opportunity radar, a value/feasibility matrix and a readiness assessment answer different questions.
 
@@ -41,10 +41,12 @@ No private transcript, special sibling writing skill or external subagent is req
 
 The v3 BCM contract delivers an HTML reading page with its generated capability-map image. Structured models stay under internal `records/model/`; additional Markdown or JSON downloads are created only when explicitly requested. Capabilities have stable IDs; objective-specific overlays remain separate. The [image workflow](bcm-creator/references/capability-map-visuals.md) bundles the user's visual reference, a shared layout and typography specification, and a helper that prepares exact labels and colors. Adapt the actual reference image, inspect the saved result and correct local defects without replacing the whole design. Set `map_image` to its relative path. Mermaid is reserved for useful supplementary diagrams.
 
+A full investment brief requires four linked pages: `index.html` for **Capability & Investment Analysis**, `investment-options.html` for **Investment Options**, `readiness.html` for **Execution Readiness**, and `research-opportunities.html` for **Research Opportunities**. These cover candidate comparisons, execution conditions and a research-paper inventory with exact searches and exclusions. All four are required when intake is skipped or scores remain unknown. Follow the [four-page contract](bcm-creator/references/output-contract.md#required-pages-for-an-investment-brief) and add shared navigation after rendering; individual renderers do not assemble it. Explicitly limited requests retain their requested scope.
+
 ```sh
 python3 bcm-creator/scripts/prepare_map_image.py bcm.json --output-dir records/map
-python3 bcm-creator/scripts/render_bcm_input_html.py bcm.json bcm.html --mermaid-js /path/mermaid.min.js
-python3 ai-opportunity-radar/scripts/render_radar.py portfolio.json matrix.html
+python3 bcm-creator/scripts/render_bcm_input_html.py bcm.json index.html --mermaid-js /path/mermaid.min.js
+python3 ai-opportunity-radar/scripts/render_radar.py portfolio.json investment-options.html
 python3 ai-opportunity-radar/scripts/render_readiness.py portfolio.json readiness.html
 ```
 

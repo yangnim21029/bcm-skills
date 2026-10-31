@@ -7,13 +7,13 @@ description: Build or revise a Business Capability Map and use it to reason abou
 
 A capability name gives related knowledge a common home. Bring equipment records, people, working practices, data and proposed tools together under the work the business must perform; then ask which improvement could help the chosen outcome. The map supports that judgment. It does not decide the investment.
 
-Read [the modeling method](references/bcm-method-howto.md) before deriving capabilities. For an investment brief, also read [the seven decision lenses](references/bcm-method-govern.md) and [the writing and diagram guide](references/writing-and-diagrams.md). Before writing or translating Traditional Chinese, read [the native writing and translation rules](references/chinese-writing.md). Use [the output contract](references/output-contract.md) for deliverables. These references are self-contained; no prior conversation, private notes or other writing skill is required.
+Read [the modeling method](references/bcm-method-howto.md) before deriving capabilities. For an investment brief, also read [the seven decision lenses](references/bcm-method-govern.md) and [the writing and diagram guide](references/writing-and-diagrams.md). Use [the output contract](references/output-contract.md) for deliverables. These references are self-contained; no prior conversation, private notes or other writing skill is required.
 
 ## Establish the decision
 
 For a new company analysis or investment assessment, begin with [the structured interactive intake](references/interactive-intake.md) before external research. Ask in small rounds about the decision, scope and evidence the user can directly provide, then selectively explore the seven lenses. Reuse existing answers and offer an explicit skip path. If the user skips, record provisional scope and material gaps, then research them through competing explanations and counterexamples. Do not interpret silence as a skip. Pure prose revisions reuse the established scope without restarting intake.
 
-Use the user's company, viewpoint, scope, objective, period and language. Respect an explicitly selected business unit or goal. When only a company is named, begin with a provisional view of its businesses, customers and shared capabilities; keep gaps visible. A detailed product page can support a local case but cannot by itself establish the company's investment priority. Do not settle on a business unit or objective because it is easy to research.
+Use the user's company, viewpoint, scope, objective and period. Write directly in English by default, including headings, captions, map labels and supplementary diagrams; set `language` to `en`. Use another language or bilingual output only when explicitly requested. Respect an explicitly selected business unit or goal. When only a company is named, begin with a provisional view of its businesses, customers and shared capabilities; keep gaps visible. A detailed product page can support a local case but cannot by itself establish the company's investment priority. Do not settle on a business unit or objective because it is easy to research.
 
 Treat each source as a partial view shaped by its purpose, audience, scope and date. Prefer primary evidence for disclosed facts; use other relevant perspectives to test interpretation. Separate a source's facts from its explanation of causes or claimed importance. Repeated coverage of one announcement is not independent corroboration, and search ranking or source volume is not business significance.
 
@@ -57,8 +57,37 @@ Use `scripts/render_bcm_input_html.py` with the v3 contract to embed the saved i
 
 The map groups capabilities; arrows belong in supplementary workflows. Colors express an objective-specific assessment, not an assertion that the company has approved the investment or deployed an AI feature. Avoid filling the map with extra generic boxes just to match the density of a reference image.
 
-For portfolio positioning, value/feasibility or readiness, use the companion `ai-opportunity-radar` skill. Do not force numerical charts into an unscored public-data brief.
+For every full investment brief, use the companion `ai-opportunity-radar` skill to produce `investment-options.html` and `readiness.html` alongside `index.html`, and automatically include `research-opportunities.html` through the preprint process below. Follow [the four-page contract](references/output-contract.md#required-pages-for-an-investment-brief). All four pages are required even with skipped intake or unknown scores; verify their shared navigation. Do not force numerical charts into an unscored public-data brief.
 
 ## Verify
 
 Check why this objective and boundary were chosen before checking objective → capability → evidence → gap → option → validation. Verify that a material counterexample or competing explanation changed or limited the judgment; retain the revision history in the research record. The reader should see the resulting company facts, causal explanation and recommendation, not a narration of the analysis process. Confirm source scope and certainty; proposed owners, scores and targets must not silently become facts. Check all seven lenses on an investment brief, capability IDs, links, Mermaid syntax, visible labels and the actual reading page. Read headings and opening sentences for clarity as well as checking structure.
+
+## Check the basis of capability judgments
+
+For compound capabilities, identify which components are evidenced, proposed or unknown. Evidence for one system or service establishes that part; it cannot establish integration, shared identifiers or an end-to-end outcome without further evidence.
+
+Separate mapped facts (problems, objectives, resources, projects) from assessments. Keep one assessment dimension per color scale and state its meaning. Retain the current attention palette; it expresses proposed attention, not measured maturity or expected returns.
+
+For each highlighted capability, retain the scoped source, supported component, inferred gap, alternative explanation and comparison behind the judgment in internal records. Explain the resulting investment implication and what could change it in company-specific prose. Identify whether precedence concerns learning through a pilot or committing resources to an improvement.
+
+Where a recommendation depends on a handoff, use a supplementary Mermaid flow to connect the relevant capabilities, required information, responsible action and confirmed outcome; mark proposed links. Define success by task, eligible cases and observation window. Separate correct handling or referral from the user's completed outcome, and account for repeat, unresolved and abandoned cases when relevant.
+
+For methodological justification, consult [the research basis and its limits](references/research-basis.md). The studies describe modeling practices; they do not establish causal investment returns. These checks fit the existing analysis and HTML format without adding a reader-facing research-method chapter.
+
+## Draft, review and repair the explanations
+
+Before drafting, read [the complete-explanation and revision process](references/explain-and-revise.md). Apply it to all four pages, including implementation details and captions. After drafting, identify what an unfamiliar reader would have to infer, repair those passages, and review the complete text again before delivery. Keep actual revisions in the internal clarity record.
+
+## Recommended companion skills when available
+
+Check the current skill catalog and prefer using these companions when available:
+
+- **`no-ai-slop`**: Before drafting, read its writing principles to guide the initial prose; this supplies writing context and does not require a user-provided draft. After the first complete draft, apply its editing workflow and evaluation checks. Preserve necessary explanations, factual limits and passage citations while removing abstract wording, tangled sentences and unnecessary material. Treat initial writing guidance and later editing as separate uses.
+- **`academic-research-suite`**: When the task involves scholarly literature, research-method review or citation verification, use the matching workflow. Load only the instructions needed for that work.
+
+Read the selected skill's instructions rather than applying its name as a label. Preserve the confirmed task scope and HTML deliverables. If a companion is unavailable, continue with this skill's existing methods without requiring installation. Record which companions were actually applied and their resulting changes in the internal review record.
+
+## Investigate preprint investment leads
+
+For full investment briefs or requested research-opportunity lists, follow [the arXiv discovery and comparison process](references/preprint-opportunities.md). Start from mapped work and examine what a method could improve. Preserve exact queries, search limits, unsuitable papers and evidence gaps. Present the paper inventory as a plain HTML comparison table, with reading leads distinguished from investment recommendations.

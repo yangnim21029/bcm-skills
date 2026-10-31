@@ -12,9 +12,9 @@ The seven lenses guide analytical coverage; they are not seven mandatory teachin
 
 Use full capability names in the reading text. Stable IDs are useful in JSON and source links, but a reader should not need to decode C07 or A1 to understand a conclusion. Keep operational detail only where it changes the decision. Put the capability register behind the main analysis rather than repeating it throughout the report.
 
-## Natural Traditional Chinese
+## Direct English prose
 
-Read [the native writing and translation rules](chinese-writing.md) before drafting or revising Chinese prose. Apply them to headings, captions, objectives, candidate descriptions and readiness notes as well as the main narrative. Explain technical terms through the actual work, preserve certainty and conditions, and use paragraphs or short useful lists without tables by default.
+Draft the report directly in English, including headings, captions, objectives, capability names and diagram labels. A separate translation pass is not part of the default workflow. Explain technical terms through the actual work, preserve certainty and conditions, and use paragraphs or short useful lists without tables by default. Follow an explicitly requested output language when one is supplied.
 
 ## Generate the capability-map image
 
@@ -29,3 +29,13 @@ Color expresses assessment under a stated objective; it does not establish matur
 ## Supplementary diagrams
 
 Mermaid can explain an execution handoff, data dependency, investment sequence or authority boundary beside the relevant company analysis. Label proposed relationships as proposals and known activities as disclosures. Arrows must mean a stated process, dependency or feedback relationship. Do not require a diagram where prose is clearer, and do not replace the primary capability image with a flowchart. Inspect the actual rendered diagrams for clipping, excessive height and readable labels.
+
+## Explain the work before the assessment details
+
+Assume the reader does not know this organization's specialist work. Introduce who does what, the evidenced or suspected obstacle, the proposed change, how that change could improve the outcome, and what would establish its value. Use connected prose, not five repeated labels. Explain unfamiliar capability names through concrete actions and work products. Keep suspected bottlenecks conditional; a disclosed service alone does not establish a failure.
+
+Give the reader enough context to understand the investment judgment before introducing data specifications, role assignments or evaluation formulas. Keep alternatives and constraints that could change the choice visible. Put supporting implementation detail after the explanation or in an expandable block, preserving the full evidence and validation conditions.
+
+Before polishing sentences, read only the headings and opening explanations. Can a reader describe the work, the proposed improvement and why it might be worth funding without opening the technical details? Revise any missing link. Concision alone does not satisfy this check.
+
+For source-backed writing, read [the passage citation and terminology rules](evidence-and-terminology.md) before drafting. Prepare the internal context synthesis, preserve source-specific meanings, and attach citations to the exact claims they support.

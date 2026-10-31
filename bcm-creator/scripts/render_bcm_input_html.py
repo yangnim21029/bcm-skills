@@ -8,8 +8,12 @@ import argparse
 import html
 import json
 import re
+import sys
 from pathlib import Path
 from urllib.parse import urlsplit
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from passage_citations import inline, validate_passages, passage_html, citation_link, references_html, STYLE, SCRIPT
 
 LENSES = {'execution', 'sustain', 'decision', 'attention', 'data', 'scope', 'autonomy'}
 PACE = {'commodity', 'keep_up', 'differentiating', 'unknown'}
@@ -36,6 +40,7 @@ def index(items, label):
 
 
 def validate(spec):
+    validate_passages(spec)
     if spec.get('schema_version') != 3:
         raise ValueError('Use schema_version 3; see references/output-contract.md')
     for key in ('company', 'viewpoint', 'decision_context', 'as_of'):
@@ -123,14 +128,14 @@ def render(spec, mermaid_js=None):
     blocks, md, diagrams = [], [], {'map': base_map(spec)}
     title = spec['company'] + tr(' — Capability-based investment brief', '｜能力與投資判斷')
     md.extend([f'# {title}', '', f'{spec["as_of"]} · {spec["viewpoint"]}', '', spec['decision_context'], ''])
-    blocks.extend([f'<h1>{esc(title)}</h1>', f'<p class="meta">{esc(spec["as_of"])} · {esc(spec["viewpoint"])}</p>', f'<p>{esc(spec["decision_context"])}</p>'])
+    blocks.extend([f'<h1>{esc(title)}</h1>', f'<p class="meta">{esc(spec["as_of"])} · {esc(spec["viewpoint"])}</p>', f'<p>{inline(spec["decision_context"],spec)}</p>'])
     def refs(item):
         ids = item.get('evidence', [])
-        return ' '.join(f'<a href="#source-{esc(i)}">[{esc(i)}]</a>' for i in ids)
+        return ' '.join(citation_link(i, spec) for i in ids)
     def mdrefs(item):
         return ' '.join(f'[{i}](#source-{i})' for i in item.get('evidence', []))
     def paragraph(value):
-        if value: blocks.append(f'<p>{esc(value)}</p>'); md.extend([str(value), ''])
+        if value: blocks.append(f'<p>{inline(value,spec)}</p>'); md.extend([str(value), ''])
     def heading(value, id):
         blocks.append(f'<h2 id="{id}">{esc(value)}</h2>'); md.extend([f'## {value}', ''])
     def diagram(code, caption):
@@ -144,12 +149,13 @@ def render(spec, mermaid_js=None):
     for value in [context] if isinstance(context, str) else context: paragraph(value)
     heading(tr('Decision objectives', '投資需要帶來的改善'), 'objectives')
     for o in spec['objectives']:
-        blocks.append(f'<h3>{esc(o["name"])}</h3><p>{esc(o.get("kpi", ""))}</p><p class="meta">{esc(o.get("status", "unknown"))} {refs(o)}</p>')
+        blocks.append(f'<h3>{esc(o["name"])}</h3><p>{inline(o.get("kpi", ""),spec)}</p><p class="meta">{esc(o.get("status", "unknown"))} {refs(o)}</p>')
         md.extend([f'### {o["name"]}', '', o.get('kpi', ''), '', f'{o.get("status", "unknown")} {mdrefs(o)}', ''])
     for point in spec.get('analysis', []):
         heading(point['title'], point['id'])
         for value in point['paragraphs']: paragraph(value)
-        blocks.append(f'<p class="refs">{refs(point)}</p>'); md.extend([mdrefs(point), ''])
+        if not any('[[' in p for p in point['paragraphs']): blocks.append(f'<p class="refs">{refs(point)}</p>')
+        md.extend([mdrefs(point), ''])
         if point.get('mermaid'):
             diagrams[point['id']] = point['mermaid']
             diagram(point['mermaid'], point['diagram_caption'])
@@ -158,7 +164,8 @@ def render(spec, mermaid_js=None):
         for p in spec['recommendations']:
             blocks.append(f'<h3>{esc(p["title"])}</h3>'); md.extend([f'### {p["title"]}', ''])
             for value in p['paragraphs']: paragraph(value)
-            blocks.append(f'<p class="refs">{refs(p)}</p>'); md.extend([mdrefs(p), ''])
+            if not any('[[' in value for value in p['paragraphs']): blocks.append(f'<p class="refs">{refs(p)}</p>')
+            md.extend([mdrefs(p), ''])
     heading(tr('Capability evidence and boundaries', '能力範圍與證據'), 'capabilities')
     blocks.append('<details><summary>'+tr('Open the capability register', '展開能力範圍與證據')+'</summary>')
     roles={'realizing':tr('Delivers the outcome','直接帶來成果'),'enabling':tr('Enables other capabilities','支援其他能力')}
@@ -167,11 +174,11 @@ def render(spec, mermaid_js=None):
     fields = [('scope', 'Scope', '範圍'), ('kpi', 'Measures', '觀察指標'), ('owner', 'Responsibility', '責任'), ('systems', 'Systems', '系統'), ('data_inputs', 'Data inputs', '輸入資料'), ('data_outputs', 'Data outputs', '輸出資料')]
     for c in spec['capabilities']:
         role=roles.get(c['role'],c['role'])
-        blocks.append(f'<article class="capability" id="{esc(c["id"])}"><h3>{esc(c["name"])}</h3><p>{esc(c["definition"])}</p><p class="meta">{esc(role)} · {esc(c.get("status", "unknown"))} {refs(c)}</p>')
+        blocks.append(f'<article class="capability" id="{esc(c["id"])}"><h3>{esc(c["name"])}</h3><p>{inline(c["definition"],spec)}</p><p class="meta">{esc(role)} · {esc(c.get("status", "unknown"))} {refs(c)}</p>')
         md.extend([f'### {c["name"]}', '', c['definition'], '', f'{role} · {c.get("status", "unknown")} {mdrefs(c)}', ''])
         for key, en, cn in fields:
             if c.get(key):
-                blocks.append(f'<p><strong>{tr(en,cn)}:</strong> {esc(c[key])}</p>'); md.extend([f'**{tr(en,cn)}:** {c[key]}', ''])
+                blocks.append(f'<p><strong>{tr(en,cn)}:</strong> {inline(c[key],spec)}</p>'); md.extend([f'**{tr(en,cn)}:** {c[key]}', ''])
         for o in spec.get('overlays', []):
             if o['capability_id'] == c['id']:
                 value = f'{objectives[o["objective_id"]]} · {paces[o["pace"]]}: {o["reason"]}'
@@ -181,15 +188,14 @@ def render(spec, mermaid_js=None):
     if spec.get('notes'):
         heading(tr('Scope and unknowns', '範圍與待確認事項'), 'notes')
         for note in spec['notes']: paragraph(note)
-    heading(tr('Sources', '資料來源'), 'sources')
+    blocks.append(references_html(spec))
+    md.extend([tr('## References', '## 參考資料'), ''])
     for s in spec['sources']:
         url = safe_url(s.get('url'))
         link = f'<a href="{esc(url)}">{esc(s["title"])}</a>' if url else esc(s['title'])
-        blocks.append(f'<p id="source-{esc(s["id"])}">[{esc(s["id"])}] {link} · {esc(s.get("date", ""))} · {esc(s.get("kind", ""))}</p>')
         md.extend([f'<a id="source-{s["id"]}"></a>', f'[{s["id"]}] '+(f'[{s["title"]}]({url})' if url else s['title'])+f' · {s.get("date", "")} · {s.get("kind", "")}', ''])
         for key,en,zh_label in [('scope','Scope','適用範圍'),('limitations','Limits','解讀限制')]:
             if s.get(key):
-                blocks.append(f'<p class="meta">{tr(en,zh_label)}：{esc(s[key])}</p>')
                 md.extend([f'**{tr(en,zh_label)}：** {s[key]}',''])
     if len(diagrams) == 1:
         script = ''
@@ -200,7 +206,7 @@ def render(spec, mermaid_js=None):
         script = '<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>'
     if len(diagrams) > 1:
         script += '<script>if(window.mermaid){mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"neutral",flowchart:{htmlLabels:false,wrappingWidth:210},themeVariables:{fontFamily:"PingFang TC, Microsoft JhengHei, sans-serif",fontSize:"17px"}});}</script>'
-    page = f'<!doctype html><html lang="{esc(spec.get("language","en"))}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><style>{CSS}</style></head><body>'+''.join(blocks)+script+'</body></html>'
+    page = f'<!doctype html><html lang="{esc(spec.get("language","en"))}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)}</title><style>{CSS}</style>{STYLE}</head><body>'+''.join(blocks)+script+(SCRIPT if any(s.get('passages') for s in spec['sources']) else '')+'</body></html>'
     return page, '\n'.join(md), diagrams
 
 

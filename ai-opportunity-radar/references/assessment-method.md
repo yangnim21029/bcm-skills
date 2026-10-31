@@ -8,7 +8,7 @@ Keep the assessment provisional and look for actual counterexamples to the propo
 
 Gather additional information to distinguish the competing explanations, rather than immediately filling every unknown or collecting more confirmations. Change the scope, candidate or confidence when warranted. If the evidence cannot establish which goal matters most, present conditional options and the observation that would distinguish them. Compare the actual bottleneck, proposed change and relevant alternatives. A model producing an alert does not establish that the workflow can make a decision, execute it and verify completion.
 
-Use that reasoning to write the final judgment about the company. The report explains the existing work, proposed improvement, causal mechanism and validation conditions. Keep the history of revising hypotheses or choosing diagrams in the research record. In Chinese, apply the included writing and translation rules to replace abstract terms with concrete actions while preserving evidence limits.
+Use that reasoning to write the final judgment about the company. The report explains the existing work, proposed improvement, causal mechanism and validation conditions. Keep the history of revising hypotheses or choosing diagrams in the research record. Use concrete actions and preserve evidence limits.
 
 Check data sources, identifiers/time linkage, outcomes needed for the chosen method, access, production updates, response time and owners. Separate data readiness from engineering/integration, governance, people and organization. Assign proposed responsibilities explicitly for ongoing data quality, operational exceptions, outcome review and changes.
 

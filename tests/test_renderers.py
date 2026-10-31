@@ -143,5 +143,97 @@ class RenderingBehavior(unittest.TestCase):
             self.assertIn('Generate and save the capability-map image',result.stderr)
             self.assertFalse(out.exists())
 
+    def source_with_passage(self):
+        return {'id':'S1','title':'Scoped service description','url':'https://example.com/service',
+                'passages':[{'id':'P1','locator':'Service scope, paragraph 2',
+                'excerpt':'Selected groups can apply.','context':'A service for selected groups.',
+                'limits':'No measured benefit is reported.','url':'https://example.com/service#scope',
+                'retrieved_at':'2026-10-31'}]}
+
+    def test_inline_passages_preserve_source_context_across_pages(self):
+        source=self.source_with_passage()
+        self.model['sources']=[source]
+        self.model['decision_context']='Selected groups can apply. [[S1:P1]] A trial is proposed.'
+        self.portfolio['sources']=[source]
+        self.portfolio['use_cases'][0]['assessment']='Selected groups can apply. [[S1:P1]]\n\nA trial is proposed.'
+        self.portfolio['readiness'][0]['basis']='Selected groups can apply. [[S1:P1]]'
+        outputs=[bcm.render(self.model)[0],matrix.render(self.portfolio),readiness.render(self.portfolio)]
+        for result in outputs:
+            self.assertIn('href="#source-S1-P1"',result)
+            self.assertIn('id="source-S1-P1"',result)
+            self.assertIn('A service for selected groups.',result)
+            self.assertIn('No measured benefit is reported.',result)
+            self.assertIn('https://example.com/service#scope',result)
+            self.assertNotIn('[[S1:P1]]',result)
+
+    def test_unknown_or_unsafe_passage_citations_fail(self):
+        self.model['sources']=[self.source_with_passage()]
+        for marker in ('[[S2:P1]]','[[S1:P2]]'):
+            self.model['decision_context']='A claim. '+marker
+            with self.assertRaises(ValueError):bcm.render(self.model)
+        self.model['decision_context']='A claim. [[S1:P1]]'
+        self.model['sources'][0]['passages'][0]['url']='javascript:alert(1)'
+        with self.assertRaises(ValueError):bcm.render(self.model)
+
+    def test_cited_prose_and_original_excerpt_are_escaped(self):
+        source=self.source_with_passage()
+        source['passages'][0]['excerpt']='<script>untrusted()</script>'
+        self.portfolio['sources']=[source]
+        self.portfolio['use_cases'][0]['assessment']='<img src=x onerror=untrusted()> [[S1:P1]]'
+        result=matrix.render(self.portfolio)
+        self.assertIn('&lt;script&gt;untrusted()&lt;/script&gt;',result)
+        self.assertIn('&lt;img src=x onerror=untrusted()&gt;',result)
+        self.assertNotIn('<script>untrusted()',result)
+        self.assertNotIn('<img src=x',result)
+
+    def test_document_number_preserves_multiple_passage_destinations(self):
+        from passage_citations import inline
+        source=self.source_with_passage()
+        second=copy.deepcopy(source['passages'][0])
+        second.update(id='P2',locator='Exceptions, paragraph 3',excerpt='Some applications require review.',url='https://example.com/service#exceptions')
+        source['passages'].append(second)
+        spec={'sources':[{'id':'S9','title':'Earlier reference'},source]}
+        result=inline('A qualified claim. [[S1:P1]] [[S1:P2]]',spec)
+        self.assertEqual(result.count('class="inline-citation"'),1)
+        self.assertIn('>[2]</a>',result)
+        self.assertIn('href="#source-S1-P1"',result)
+        self.assertIn('data-passage-targets="source-S1-P1 source-S1-P2"',result)
+        separate=inline('First claim. [[S1:P1]] Different claim. [[S1:P2]]',spec)
+        self.assertEqual(separate.count('class="inline-citation"'),2)
+        spec['passage_reference_page']='index.html'
+        shared=inline('A qualified claim. [[S1:P1]] [[S1:P2]]',spec)
+        self.assertIn('href="index.html?passages=source-S1-P1,source-S1-P2#source-S1-P1"',shared)
+
+    def test_compact_references_keep_exact_excerpts_and_all_context(self):
+        from passage_citations import references_html
+        source=self.source_with_passage()
+        source['passages'][0]['excerpt']='原文：保留限定條件。 <original>'
+        result=references_html({'sources':[source]})
+        self.assertIn('class="reference-list"',result)
+        self.assertIn('id="source-S1"',result)
+        self.assertIn('id="source-S1-P1"',result)
+        self.assertIn('原文：保留限定條件。 &lt;original&gt;',result)
+        self.assertIn('A service for selected groups.',result)
+        self.assertIn('No measured benefit is reported.',result)
+        self.assertNotIn('<details open',result)
+        shared=references_html({'sources':[source],'passage_reference_page':'index.html'})
+        self.assertIn('href="index.html#source-S1"',shared)
+        self.assertNotIn('id="source-S1-P1"',shared)
+
+    def test_implementation_and_readiness_preserve_paragraphs_and_citations(self):
+        self.portfolio['sources']=[self.source_with_passage()]
+        self.portfolio['use_cases'][0]['validation']='Keep all cases. [[S1:P1]]\n\nCount unresolved work separately.'
+        self.portfolio['readiness'][0]['next_action']='Confirm the applicable document.\n\nAsk the office to resolve an exception. [[S1:P1]]'
+        options=matrix.render(self.portfolio)
+        ready=readiness.render(self.portfolio)
+        self.assertIn('<p>Count unresolved work separately.</p>',options)
+        self.assertIn('<p>Confirm the applicable document.</p>',ready)
+        self.assertIn('<p>Ask the office to resolve an exception.',ready)
+        for result in [options,ready]:self.assertIn('href="#source-S1-P1"',result)
+
+    def test_standalone_citation_helpers_remain_identical(self):
+        self.assertEqual((ROOT/'bcm-creator/scripts/passage_citations.py').read_bytes(),
+                         (ROOT/'ai-opportunity-radar/scripts/passage_citations.py').read_bytes())
+
 
 if __name__ == '__main__': unittest.main()
