@@ -50,6 +50,6 @@ python3 scripts/render_bcm_input_html.py /path/bcm.json /path/index.html --merma
 
 The command checks the image path relative to the HTML output and writes only the HTML page by default. Use `--export-sources` only when Markdown and Mermaid authoring exports are explicitly requested. The optional local bundle supports offline supplementary diagrams. Source facts and analysis remain readable without JavaScript.
 
-The fictional JSON fixtures illustrate the schema only; their image path is a placeholder to be generated before a CLI render. They are not company examples to reproduce. A v2 file needs a generated image plus `paragraphs`/`lenses` in place of the lecture-note fields before use with this renderer.
+A v2 file needs a generated image plus `paragraphs`/`lenses` in place of the lecture-note fields before use with this renderer.
 
 For sentence-level evidence, sources may include `passages` and prose may use `[[S03:P1]]`, following [the citation and terminology contract](evidence-and-terminology.md). Render the shared passage references on this main page; keep the working terminology synthesis in internal records.

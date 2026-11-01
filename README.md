@@ -157,7 +157,7 @@ python3 ai-opportunity-radar/scripts/render_readiness.py records/model/portfolio
 
 These commands assume the authoring models and output directory exist. `prepare_map_image.py` prepares exact labels, colors and a prompt. The agent must generate and inspect the image using the [bundled reference workflow](bcm-creator/references/capability-map-visuals.md), then save it at the model’s `map_image` path relative to `output/` before rendering the main page.
 
-The agent also writes the research page and adds shared navigation; the individual renderers do not assemble the four-page report. A local Mermaid bundle supports offline supplementary diagrams. Despite its historical filename, `render_radar.py` renders a value/feasibility matrix when scores are available. Fictional JSON fixtures under `references/` illustrate the schemas.
+The agent also writes the research page and adds shared navigation; the individual renderers do not assemble the four-page report. A local Mermaid bundle supports offline supplementary diagrams. Despite its historical filename, `render_radar.py` renders a value/feasibility matrix when scores are available.
 
 Run the renderer checks with:
 

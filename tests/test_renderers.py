@@ -25,8 +25,52 @@ readiness = module('readiness_renderer', 'ai-opportunity-radar/scripts/render_re
 
 class RenderingBehavior(unittest.TestCase):
     def setUp(self):
-        self.model = json.loads((ROOT / 'bcm-creator/references/example-bcm-input.json').read_text())
-        self.portfolio = json.loads((ROOT / 'ai-opportunity-radar/references/example-portfolio.json').read_text())
+        # Minimal synthetic inputs belong to the tests, not the skill resources.
+        self.model = {
+            'schema_version': 3, 'mode': 'map', 'company': 'Test repair service',
+            'as_of': 'Test fixture', 'language': 'en', 'viewpoint': 'Service operator',
+            'decision_context': 'Evaluate repeat visits.', 'context': 'Synthetic test data.',
+            'objectives': [{'id': 'O1', 'name': 'Reduce repeat visits',
+                            'kpi': 'Repeat-visit rate', 'status': 'proposed', 'evidence': ['S1']}],
+            'capabilities': [
+                {'id': 'C1', 'name': 'Repair equipment', 'level': 'L1',
+                 'domain': 'Service delivery', 'role': 'realizing',
+                 'definition': 'Diagnose and repair equipment.',
+                 'status': 'hypothetical', 'evidence': ['S1']},
+                {'id': 'C2', 'name': 'Manage repair records', 'level': 'L1',
+                 'domain': 'Service information', 'role': 'enabling',
+                 'definition': 'Maintain repair records.',
+                 'status': 'hypothetical', 'evidence': ['S1']},
+            ],
+            'overlays': [], 'analysis': [], 'recommendations': [],
+            'sources': [{'id': 'S1', 'title': 'Synthetic test source', 'url': '',
+                         'date': 'undated', 'kind': 'hypothetical'}],
+            'map_image': 'generated-capability-map.png',
+            'map_alt': 'Fictional repair-company capability map',
+            'map_caption': 'Synthetic renderer test image.',
+        }
+        self.portfolio = {
+            'schema_version': 2, 'company': 'Test repair service', 'as_of': 'Test fixture',
+            'objective': 'Reduce repeat visits', 'score_scale': 'Synthetic 1–5 test values.',
+            'use_cases': [
+                {'id': 'U1', 'name': 'Find relevant repair history',
+                 'capability_id': 'C1', 'capability': 'Repair equipment', 'type': 'defend',
+                 'value': 3, 'feasibility': 4, 'score_status': 'estimated',
+                 'basis': 'Synthetic score for renderer testing.', 'dependencies': []},
+                {'id': 'U2', 'name': 'Suggest replacement parts',
+                 'capability_id': 'C1', 'capability': 'Repair equipment', 'type': 'extend',
+                 'value': None, 'feasibility': None, 'score_status': 'unknown',
+                 'basis': 'No evidence supplied.', 'dependencies': ['U1']},
+            ],
+            'readiness': [
+                {'dim': name, 'current': 2 if i == 0 else None,
+                 'future': 3 if i == 0 else None,
+                 'score_status': 'estimated' if i == 0 else 'unknown',
+                 'basis': 'Synthetic assessment.' if i == 0 else 'No assessment supplied.'}
+                for i, name in enumerate(['Strategy', 'Value', 'Organization',
+                                          'People and culture', 'Governance', 'Engineering', 'Data'])
+            ],
+        }
 
     def test_unknown_candidate_is_visible_without_coordinates(self):
         result = matrix.render(self.portfolio)

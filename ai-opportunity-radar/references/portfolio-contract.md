@@ -20,8 +20,6 @@ Each readiness item has `dim`, `current`, `future` (numbers in [1,5] or null), `
 
 Sources may be strings or objects with `id`, `title`, `url`, `date`, `kind`, `scope` and `limitations`. Source objects become readable references with link targets for candidate `evidence` IDs. Keep source scope and certainty explicit.
 
-`references/example-portfolio.json` is a fictional demonstration with explicitly illustrative scores and an unscored candidate. It is not permission to estimate a real organization's internal scores.
-
 ## Explain each option before its implementation details
 
 Write `assessment` as a self-contained explanation for a reader unfamiliar with the sector: who performs which task, where an evidenced or suspected obstacle occurs, what the proposed change does, why it could improve the outcome, and how to judge whether it is worth the cost. Explain specialist terms through that work. Keep suspected problems conditional and material alternatives visible. A service description establishes activity; it does not establish a bottleneck. Use connected paragraphs; blank lines may separate paragraphs within the string.
