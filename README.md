@@ -2,6 +2,8 @@
 
 Turn a company URL or internal documents into a report on **which work is worth improving, what you could build, and how to test whether it helps**.
 
+**[Open the live TSMC demo](https://yangnim21029.github.io/bcm-skills/)** — a new public-source report made with the current skills, with a capability map, investment options, execution conditions and research opportunities. Its proposed improvements are independent analysis, not TSMC-approved investments.
+
 These two agent skills research an organization, map the work it performs, and develop investment options with evidence, implementation conditions and research papers. Investment means committing staff time, software spending or development effort to an improvement.
 
 A business capability is work an organization needs to perform, such as maintaining product information or resolving an order problem. Grouping evidence under those names lets you compare a new tool, a process change and an existing service against the same task.
